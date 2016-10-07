@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+require('dotenv').config();
+require('./config/database');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
