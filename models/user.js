@@ -1,26 +1,13 @@
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
-  title: {
+  username: {
     type: String,
     required: true
   },
-  releaseYear: {
-    type: Number,
-    default: function() {
-      return new Date().getFullYear();
-    },
-    min: 1927
-  },
-  rating: {
+  email: {
     type: String,
-    enum: ['G', 'PG', 'PG-13', 'R']
-  },
-  cast: [String],
-  nowShowing: Boolean,
-  createdAt: {
-    type: Date,
-    default: Date.now
+    required: true
   }
 });
 
