@@ -13,7 +13,6 @@ var commentSchema = new mongoose.Schema({
 var streetSchema = new mongoose.Schema({
   address: String,
   crossStreets: String,
-  locations: [{type: ObjectId, ref: 'Bar'}],
   comments: [commentSchema],
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now}
