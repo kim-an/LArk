@@ -26,7 +26,7 @@ var streetSchema = new mongoose.Schema({
         }
     ],
     validate:[arrayLimit];
-  }
+  },
   comments: [commentSchema],
   createdAt: {
       type: Date,
@@ -35,7 +35,18 @@ var streetSchema = new mongoose.Schema({
   updatedAt: {
       type: Date,
       default: Date.now
-  }
+  },
+  invalidHours: [
+    {
+      day: {
+        type: String,
+        enum: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+      },
+      // TODO: validate start and end time to 0000 - 2400 format
+      startTime: String,
+      endTime: String
+    }
+  ]
 });
 
 function arrayLimit(val) {
