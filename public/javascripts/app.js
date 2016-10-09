@@ -37,5 +37,31 @@ function initMap() {
     });
     console.log(marker);
   });
+
+  // Geocoder
+  var geocoder = new google.maps.Geocoder();
+  // Click event to go to address
+  document.getElementById('getAddress').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
 }
+
+function geocodeAddress(geocoder, resultsMap) {
+  var address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    // use results[0].geometry.location.lat(), results[0].geometry.location.lng() to get lat/long
+    if (status === 'OK') {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+
+
 
