@@ -1,0 +1,40 @@
+#intro {
+  width: 35vw;
+  margin: auto;
+}
+
+ul{
+  list-style: none;
+  padding: 1vw;
+  margin: auto;
+}
+
+li {
+  margin: 0;
+}
+
+img {
+  float: left;
+  width: 5vw;
+  height: 5vw;
+  clear: both;
+  padding: 1vw;
+}
+
+p {
+  padding-top: 2vw;
+}
+
+footer {
+  width: 15vw;
+  margin: auto;
+  padding: 5vw;
+}
+
+#login {
+  width: 15vw;
+  height: 5vw;
+  background-color: rgba(255, 50, 50, .8);
+  font-family: fantasy, sans-serif;
+  font-size: 20px;
+}

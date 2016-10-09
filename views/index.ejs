@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="stylesheets/style.css">
-  <title>LArk</title>
-</head>
-<body>
-<header>
-   <div id="title">
-    <h1>LArk</h1>
-  </div>
-</header>
-  <div id="intro">
-    <ul>
-      <li>
-        <img src="http://i.imgur.com/JhdS0bGt.jpg" alt="" />
-        <p>See open parking spots on all surrounding streets.</p>
-      </li><br>
-      <li>
-        <img src="http://i.imgur.com/FwjTyvxt.jpg" alt="" />
-        <p>Know immediately which streets are free to park on which require permits and how long you can park there. </p>
-      </li><br>
-      <li>
-        <img src="http://i.imgur.com/7hCGOyjt.jpg" alt="" />
-        <p>Earn points by submitting information about your city.</p>
-      </li>
-    </ul>
-  </div>
-  <footer>
-    <button id="login">Login with Google</button>
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+
+  </head>
+  <body>
+    <div id="topbar">
+        <input type="text" name="street[address]">
+        &nbsp;
+        <button>Submit</button>
+    <div id="plus">+</div>
+    </div>
+    <div class="submit-data hidden" id="display-time">
+      It is currently <%= day %>, <%= hour %>:<%= minute %> <%= AMPM %> at currentStreet.
+      At what times is it alright to park here? From <input type="text" name="street[startTime]"> to <input type="text" name="street[endTime]">
+
+    </div>
+    <div id="map"></div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="javascripts/app.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap">
+    </script>
+  </body>
+>>>>>>> 26fa0c3658df957ef6b51f0816b5defebaac54e6
 </html>

@@ -6,43 +6,36 @@
   margin: auto;
 }
 
-#intro {
-  width: 35vw;
-  margin: auto;
+* {
+  border: 1px solid red;
 }
 
-ul{
-  list-style: none;
-  padding: 1vw;
-  margin: auto;
-}
-
-li {
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
+  color: white;
 }
 
-img {
-  float: left;
-  width: 5vw;
-  height: 5vw;
-  clear: both;
-  padding: 1vw;
+#map {
+  height: 90vh;
+  width: 100vw;
 }
 
-p {
-  padding-top: 2vw;
+#topbar {
+  height: 8vh;
+  width: 100vw;
+  background-color: rgba(61, 88, 151, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-footer {
-  width: 15vw;
-  margin: auto;
-  padding: 5vw;
+.hidden {
+  display: none;
 }
 
-#login {
-  width: 15vw;
-  height: 5vw;
-  background-color: rgba(255, 50, 50, .8);
-  font-family: fantasy, sans-serif;
-  font-size: 20px;
+.submit-data {
+  background-color: rgba(61, 88, 151, 1);
+  padding: 5px;
 }
+
