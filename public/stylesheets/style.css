@@ -1,8 +1,27 @@
+* {
+  border: 1px solid red;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
 }
 
 a {
   color: #00B7FF;
 }
+
+#map {
+  height: 90vh;
+  width: 100vw;
+}
+
+#topbar {
+  height: 8vh;
+  width: 100vw;
+  background-color: rgba(61, 88, 151, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
