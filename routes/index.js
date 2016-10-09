@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var usersController = require('../controllers/users');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { apiKey: process.env.MAPS_KEY });
-});
+router.get('/', usersController.index);
 
 module.exports = router;

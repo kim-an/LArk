@@ -11,6 +11,12 @@
         <input type="text" name="street[address]">
         &nbsp;
         <button>Submit</button>
+    <div id="plus">+</div>
+    </div>
+    <div class="submit-data hidden" id="display-time">
+      It is currently <%= day %>, <%= hour %>:<%= minute %> <%= AMPM %> at currentStreet.
+      At what times is it alright to park here? From <input type="text" name="street[startTime]"> to <input type="text" name="street[endTime]">
+
     </div>
     <div id="map"></div>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
