@@ -18,6 +18,13 @@ var commentSchema = new mongoose.Schema({
 
 var streetSchema = new mongoose.Schema({
   address: String,
+  coordinates: {
+    type: {
+      lat: String,
+      lng: String
+    },
+    required: true
+  },
   crossStreetsCoordinates: {
     type: [
         {
