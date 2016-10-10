@@ -1,5 +1,5 @@
 var User = require('../models/user');
-var Street = require('../models/street');
+var Tip = require('../models/tip');
 
 module.exports = {
   index: index,
