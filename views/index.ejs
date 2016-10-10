@@ -8,9 +8,6 @@
   </head>
   <body>
     <div id="topbar">
-        <input type="text" name="street[address]">
-        &nbsp;
-        <button>Submit</button>
     <ul class='right'>
       <!-- <#% if (user) { %> -->
         <li><a href="/logout">Logout</a></li>
@@ -18,6 +15,9 @@
         <li><a href="/auth/google">Login with Google</a></li>
       <!-- <#% } %> -->
     </ul>
+        <input id="address" type="text" name="street[address]">
+        &nbsp;
+        <button id="getAddress">Submit</button>
     <div id="plus">+</div>
     </div>
     <div class="submit-data hidden" id="display-time">
