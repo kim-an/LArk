@@ -1,4 +1,3 @@
-var student = 'Joseph';
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -38,7 +37,7 @@ app.use(methodOverride('_method'));
 app.use(session({
   secret: 'LArk',
   resave: false,
-  saveUnitialized: true
+  saveUninitialized: true
 }));
 
 // mount passport
