@@ -25,7 +25,7 @@ var streetSchema = new mongoose.Schema({
           lng: String
         }
     ],
-    validate:[arrayLimit];
+    validate:[arrayLimit]
   },
   comments: [commentSchema],
   createdAt: {
@@ -51,8 +51,7 @@ var streetSchema = new mongoose.Schema({
 
 function arrayLimit(val) {
   return val.length <= 2;
+}
 
 module.exports = mongoose.model('Street', streetSchema);
-
-
 
