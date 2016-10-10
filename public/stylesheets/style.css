@@ -1,3 +1,11 @@
+#title {
+  border: 1px solid black;
+  text-align: center;
+  width: 20vw;
+  background-color: grey;
+  margin: auto;
+}
+
 * {
   border: 1px solid red;
 }
@@ -6,10 +14,6 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
   color: white;
-}
-
-a {
-  color: #00B7FF;
 }
 
 #map {

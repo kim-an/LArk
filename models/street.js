@@ -62,5 +62,3 @@ function arrayLimit(val) {
 
 module.exports = mongoose.model('Street', streetSchema);
 
-
-
