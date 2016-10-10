@@ -1,3 +1,11 @@
+#title {
+  border: 1px solid black;
+  text-align: center;
+  width: 20vw;
+  background-color: grey;
+  margin: auto;
+}
+
 #intro {
   width: 35vw;
   margin: auto;
