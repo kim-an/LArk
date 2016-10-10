@@ -1,3 +1,15 @@
+console.log('linked!');
+
+$(document).ready(function(){
+  var socket = io();
+  // send test event to server
+  socket.emit('test', {test: "testobject"});
+  // receive response from server
+  socket.on('test', function(data){
+    console.log(data);
+  });
+});
+
 $(document).ready(function(){
   $('#plus').on('click', function(){
     $('.submit-data').removeClass('hidden');
