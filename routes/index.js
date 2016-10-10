@@ -4,11 +4,10 @@ var passport = require('passport');
 var usersController = require('../controllers/users');
 
 /* GET home page. */
-router.get('/', usersController.index);
 
-router.get('/', function(req, res) {
-  res.render('index', { user: req.user });
-});
+router.get('/welcome', usersController.welcome);
+
+router.get('/', usersController.index);
 
 // Google OAuth login route
 router.get('/auth/google', passport.authenticate(
