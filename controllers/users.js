@@ -1,4 +1,5 @@
-var db = require('../models/user');
+var User = require('../models/user');
+var Street = require('../models/street')
 
 module.exports = {
   index: index
@@ -61,5 +62,8 @@ function index(req, res, next) {
       return currentMinute;
     }
   }();
+
   res.render('index', { apiKey: process.env.MAPS_KEY, hour: hour, minute: minute, day: today, AMPM: AMPM });
 }
+
+

@@ -18,6 +18,13 @@ var commentSchema = new mongoose.Schema({
 
 var streetSchema = new mongoose.Schema({
   address: String,
+  coordinates: {
+    type: {
+      lat: String,
+      lng: String
+    },
+    required: true
+  },
   crossStreetsCoordinates: {
     type: [
         {
@@ -25,7 +32,7 @@ var streetSchema = new mongoose.Schema({
           lng: String
         }
     ],
-    validate:[arrayLimit];
+    validate:[arrayLimit]
   },
   comments: [commentSchema],
   createdAt: {
@@ -40,7 +47,7 @@ var streetSchema = new mongoose.Schema({
     {
       day: {
         type: String,
-        enum: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+        enum: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
       },
       // TODO: validate start and end time to 0000 - 2400 format
       startTime: String,
@@ -51,6 +58,7 @@ var streetSchema = new mongoose.Schema({
 
 function arrayLimit(val) {
   return val.length <= 2;
+}
 
 module.exports = mongoose.model('Street', streetSchema);
 
