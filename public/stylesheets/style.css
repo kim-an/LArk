@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-* {
-=======
 #title {
   border: 1px solid black;
   text-align: center;
@@ -8,11 +5,6 @@
   background-color: grey;
   margin: auto;
 }
-
-/* {
->>>>>>> cf94a75399311cc5c8756707e57fedfd732f21c2
-  border: 1px solid red;
-}*/
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
