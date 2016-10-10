@@ -2,16 +2,16 @@ var mongoose = require('mongoose');
 
 var commentSchema = new mongoose.Schema({
   body: {
-      type: String,
-      required: true
+    type: String,
+    required: true
   },
   commentBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   createdAt: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   }
 });
 
@@ -27,21 +27,21 @@ var streetSchema = new mongoose.Schema({
   },
   crossStreetsCoordinates: {
     type: [
-        {
-          lat: String,
-          lng: String
-        }
+      {
+        lat: String,
+        lng: String
+      }
     ],
     validate:[arrayLimit]
   },
   comments: [commentSchema],
   createdAt: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   },
   updatedAt: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   },
   invalidHours: [
     {
