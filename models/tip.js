@@ -5,10 +5,14 @@ var tipSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
+  parkingType: {
+    type: String,
+    enum: ['Street', 'Outdoor Lot', 'Indoor Lot']
+  },
   coordinates: {
     type: {
-      lat: String,
-      lng: String
+      lat: Number,
+      lng: Number
     },
     required: true
   },
