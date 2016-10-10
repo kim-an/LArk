@@ -3,7 +3,7 @@ mongoose.Promise = Promise;
 mongoose.connect(`${process.env.DB_URI}`);
 var con = mongoose.connection;
 mongoose.connection.once('open', function() {
-  console.log(`You're connected to: ${con.host}`)
+  console.log(`You're connected to: ${con.host}`);
 });
 
 module.exports = mongoose;
