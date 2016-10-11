@@ -11,8 +11,25 @@ body {
   margin: 0;
 }
 
+#aboutus {
+  width: 10vw;
+}
+
+#add-tip {
+  margin-left: 10vw;
+  margin-right: 15vw;
+}
+
+#getAddress {
+  margin-right: 10vw;
+}
+
+.left {
+  margin-left: 15vw;
+}
+
 #map {
-  height: 85vh;
+  height: 90vh;
   width: 100vw;
 }
 
@@ -21,9 +38,8 @@ body {
   width: 100vw;
   background-color: rgba(61, 88, 151, 1);
   display: flex;
-  justify-content: center;
+  /*justify-content: center;*/
   align-items: center;
-  color: white;
 }
 
 .hidden {
@@ -33,12 +49,14 @@ body {
 .submit-data {
   background-color: rgba(61, 88, 151, 1);
   padding: 5px;
-  color: white;
 }
 
-footer {
+li {
+  display: inline;
   padding: 1vw;
 }
 
-
+a {
+  color: white;
+}
 

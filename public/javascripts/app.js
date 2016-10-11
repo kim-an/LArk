@@ -140,3 +140,7 @@ $addTip.on('click', function(){
 $plus.on('click', function(){
   $('.submit-data').toggleClass('hidden');
 });
+
+$('#myModal').on('click',function(evt){
+  modal('show');
+});
