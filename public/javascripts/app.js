@@ -9,13 +9,6 @@ $addTip.on('click', function(){
  addTipToggle = true;
 });
 
-$("[data-toggle=popover]").popover({
-    html: true,
-  content: function() {
-          return $('#popover-content').html();
-        }
-});
-
 // TODO DISTRACT USER WHILE MAP IS LOADING AND CENTERING
 // navigator.geolocation.watchPosition(function(obj){
 //   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
@@ -137,6 +130,7 @@ function initMap() {
         infoWindow.open(map, marker);
         socket.emit('getTips');
         socket.on('renderMarkers', render);
+
       });
     }
   });
