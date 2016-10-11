@@ -49,54 +49,20 @@ function render(tips) {
 
 function initMap() {
   // styled map
-  var styledMapType = new google.maps.StyledMapType(
-    [
-      {
-        "featureType": "all",
-        "stylers": [
-          {
-            "saturation": 0
-             },
-             {
-                 "hue": "#e7ecf0"
-             }
-             ]
-         },
-         {
-             "featureType": "road",
-             "stylers": [
-                 {
-                     "saturation": -70
-                 }
-             ]
-         },
-         {
-             "featureType": "transit",
-             "stylers": [
-                 {
-                     "visibility": "off"
-                 }
-             ]
-         },
-         {
-             "featureType": "poi",
-             "stylers": [
-                 {
-                     "visibility": "off"
-                 }
-             ]
-         },
-         {
-             "featureType": "water",
-             "stylers": [
-                 {
-                     "visibility": "simplified"
-                 },
-                 {
-                     "saturation": -60
-                 }
-             ]
-         }
+   var styledMapType = new google.maps.StyledMapType(
+          [{"featureType": "all",
+        "stylers": [{"saturation": 0},
+                    {"hue": "#e7ecf0"}]},
+      {"featureType": "road",
+       "stylers": [{"saturation": -70}]},
+      {"featureType": "transit",
+       "stylers": [{"visibility": "off"}]},
+      {"featureType": "poi",
+       "stylers": [{"visibility": "off"}]},
+      {"featureType": "water",
+       "stylers": [{"visibility": "simplified"},
+        {"saturation": -60}]
+      }
      ],
      {name: 'Styled Map'});
 
@@ -133,10 +99,10 @@ function initMap() {
       });
     }
 // submit button action
-    $('#submit').on('click', function(evt){
+    $('#map').on('click', '#submit', function(evt){
       console.log('clicked!');
-      socket.emit('submitData', {parkingType: $('#parkingTypeField').val()});
-      socket.on();
+      // socket.emit('submitData', {parkingType: $('#parkingTypeField').val()});
+      // socket.on();
     });
 
   }); // close addListener
