@@ -52,11 +52,15 @@
         </select>
       </div>
       <div class="form-field">
+        Max Time:
         <select name="maxTime">
           <% for (var i = 1; i < 25; i++){ %>
-            <option value="<%= i %>"><%= i %> hour</option>
+            <option value="<%= i %>"><%= i %> <%= i < 2 ? 'hour':'hours' %></option>
           <% }; %>
         </select>
+      </div>
+      <div class="form-field">
+        Permit:
       </div>
   </template>
     <script src="/socket.io/socket.io.js"></script>
