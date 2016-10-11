@@ -1,5 +1,6 @@
 var myLocation;
 var map;
+var socket = io();
 
 // TODO DISTRACT USER WHILE MAP IS LOADING AND CENTERING
 // navigator.geolocation.watchPosition(function(obj){
@@ -17,33 +18,27 @@ navigator.geolocation.watchPosition(function(obj){
   }
 });
 
-$(document).ready(function(){
-  var socket = io();
-  // send test event to server
-  socket.emit('test', {test: "testobject"});
-  // receive response from server
-  socket.on('test', function(data){
-    console.log(data);
-  });
-});
-
-
 $('#plus').on('click', function(){
   $('.submit-data').toggleClass('hidden');
 });
 
 
-// fake db
-var places = [
-  {
-    "latitude": 34.030935,
-    "longitude": -118.26663732
-  },
-  {
-    "latitude": 34.0305689,
-    "longitude": -118.2663225
-  }
-];
+function render(tips) {
+  tips.forEach(function(tip) {
+    var content = 'Add Content';
+    var infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+    var latLng = {lat: tip.coordinates.lat, lng: tip.coordinates.lng};
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker);
+    });
+  })
+}
 
 
 function initMap() {
@@ -53,23 +48,9 @@ function initMap() {
     zoom: 18,
     center: startLocation
   });
-  // loop through fake db and mark each place
-  places.forEach(function(place){
-    // TODO put in value of comments key from real DB (move this to controller?)
-    var content = 'Yo I live here';
-    var infoWindow = new google.maps.InfoWindow({
-      content: content
-    });
-    var latLng = {lat: place.latitude, lng: place.longitude};
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: map
-    });
-    marker.addListener('click', function(){
-      infoWindow.open(map, marker);
-    });
-  });
-
+  // loop throug db and mark each place
+  socket.emit('getTips');
+  socket.on('renderMarkers', render);
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
     $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
@@ -82,6 +63,8 @@ function initMap() {
         map: map
       });
       infoWindow.open(map, marker);
+      socket.emit('getTips');
+      socket.on('renderMarkers', render);
     });
   });
 
