@@ -1,14 +1,25 @@
 #title {
   border: 1px solid black;
   text-align: center;
-  width: 20vw;
-  background-color: grey;
+  background-color: rgba(61, 88, 151, 1);
   margin: auto;
+}
+
+h1 {
+  text-align: center;
 }
 
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
+}
+
+ul {
+  text-align: center;
+}
+
+a {
+  color: white;
 }
 
 #map {

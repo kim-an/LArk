@@ -2,35 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="stylesheets/welcome.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+  <script src="https://apis.google.com/js/api:client.js"></script>
   <title>LArk</title>
 </head>
 <body>
 <header>
-   <div id="title">
+   <div class="jumbotron" id="title">
     <h1>LArk</h1>
   </div>
 </header>
   <div id="intro">
-    <ul>
-      <li>
-        <img src="http://i.imgur.com/JhdS0bGt.jpg" alt="" />
-        <p>See open parking spots on all surrounding streets.</p>
+  <div class="page-header">
+    <h1>Park cheap. Park safe.</h1>
+  </div>
+  <div class="container">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <p><img src="http://i.imgur.com/JhdS0bGt.jpg" alt="" class="img-rounded"/>Know which streets to park on.</p>
       </li><br>
-      <li>
-        <img src="http://i.imgur.com/FwjTyvxt.jpg" alt="" />
-        <p>Know immediately which streets are free to park on which require permits and how long you can park there. </p>
+      <li class="list-group-item">
+        <p><img src="http://i.imgur.com/FwjTyvxt.jpg" alt="" class="img-rounded"/>Know immediately which streets are free to park on which require permits and how long you can park there. </p>
       </li><br>
-      <li>
-        <img src="http://i.imgur.com/7hCGOyjt.jpg" alt="" />
-        <p>Earn points by submitting information about your city.</p>
+      <li class="list-group-item">
+        <p><img src="http://i.imgur.com/7hCGOyjt.jpg" alt="" class="img-rounded"/>Earn points by submitting information about your city.</p>
       </li>
     </ul>
   </div>
   <footer>
-    <form action="/auth/google">
-      <input id="login" type="submit" value="Login with Google">
-    </form>
+      <button type="button" class="btn btn-primary btn-block"><a href="/auth/google">Login with Google</button>
   </footer>
 </body>
 </html>
