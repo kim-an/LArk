@@ -59,7 +59,22 @@
           </select>
         </div>
         <div class="form-field">
-          Permit:
+          <fieldset>
+            <legend>Permit:</legend>
+              <label for="required"><input type="radio" name="permit" value=true>Required</label>
+              <label for="not-required"><input type="radio" name="permit" value=false>Not required</label>
+          </fieldset>
+        </div>
+        <div class="form-field">
+          Cost:
+          $<input type="text">/hr
+        </div>
+        <div class="form-field">
+          Cost Exceptions:
+           <input type="text">
+        </div>
+        <div class="submit">
+        <button>Submit</button>
         </div>
     </template>
     <footer>
