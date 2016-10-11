@@ -12,7 +12,7 @@ body {
 }
 
 #map {
-  height: 90vh;
+  height: 85vh;
   width: 100vw;
 }
 
@@ -34,5 +34,9 @@ body {
   background-color: rgba(61, 88, 151, 1);
   padding: 5px;
   color: white;
+}
+
+footer {
+  padding: 1vw;
 }
 
