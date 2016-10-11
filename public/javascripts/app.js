@@ -119,7 +119,7 @@ function initMap() {
     // if add tip is toggled then allow post
     if(addTipToggle) {
       $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
-        var form = 'form content <input type="text">';
+        var form = $('#google-maps-form').html();
         var infoWindow = new google.maps.InfoWindow({
           content: form
         });
@@ -132,7 +132,15 @@ function initMap() {
         socket.on('renderMarkers', render);
       });
     }
-  });
+// submit button action
+    $('#submit').on('click', function(evt){
+      console.log('clicked!');
+      socket.emit('submitData', {parkingType: $('#parkingTypeField').val()});
+      socket.on();
+    });
+
+  }); // close addListener
+
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();
