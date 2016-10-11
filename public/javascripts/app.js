@@ -40,14 +40,70 @@ function render(tips) {
   })
 }
 
-
 function initMap() {
+  // styled map
+   var styledMapType = new google.maps.StyledMapType(
+     [
+         {
+             "featureType": "all",
+             "stylers": [
+                 {
+                     "saturation": 0
+                 },
+                 {
+                     "hue": "#e7ecf0"
+                 }
+             ]
+         },
+         {
+             "featureType": "road",
+             "stylers": [
+                 {
+                     "saturation": -70
+                 }
+             ]
+         },
+         {
+             "featureType": "transit",
+             "stylers": [
+                 {
+                     "visibility": "off"
+                 }
+             ]
+         },
+         {
+             "featureType": "poi",
+             "stylers": [
+                 {
+                     "visibility": "off"
+                 }
+             ]
+         },
+         {
+             "featureType": "water",
+             "stylers": [
+                 {
+                     "visibility": "simplified"
+                 },
+                 {
+                     "saturation": -60
+                 }
+             ]
+         }
+     ],
+     {name: 'Styled Map'});
+
   // TODO: need to dynamically change myLocation using location services
   var startLocation = {lat: 34.030935, lng: -118.266637};
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18,
     center: startLocation
   });
+
+  // associating the styled map w/existing map
+  map.mapTypes.set('styled_map', styledMapType);
+  map.setMapTypeId('styled_map');
+
   // loop throug db and mark each place
   socket.emit('getTips');
   socket.on('renderMarkers', render);
