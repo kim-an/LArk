@@ -18,7 +18,7 @@
       <% } %>
     </ul>
     <div id="plus">+</div>
-    <button id="addtip">Add Tip</button>
+    <button id="add-tip">Add Tip</button>
     </div>
     <div class="submit-data hidden" id="display-time">
       At what times is it alright to park here? From <input type="text" name="street[startTime]"> to <input type="text" name="street[endTime]">
@@ -101,9 +101,9 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="javascripts/app.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap">
     </script>
-    <script src="javascripts/app.js"></script>
   </body>
 </html>
