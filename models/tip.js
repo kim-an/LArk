@@ -17,15 +17,13 @@ var tipSchema = new mongoose.Schema({
     required: true
   },
   comment: {
-    message: {
-      type: String
-    },
+    message: String,
     createdAt: {
       type: Date,
       default: Date.now
     }
   },
-  invalidHours: [
+  validHours: [
     {
       day: {
         type: String,
@@ -41,9 +39,10 @@ var tipSchema = new mongoose.Schema({
     required: true
   },
   cost: String,
-  costExceptions: [String]
+  costExceptions: [String],
+  maxTime: String
 });
 
 
-module.exports = mongoose.model('Street', tipSchema);
+module.exports = mongoose.model('Tip', tipSchema);
 
