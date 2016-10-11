@@ -44,59 +44,25 @@ function render(tips) {
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
     });
-  })
+  });
 }
 
 function initMap() {
   // styled map
    var styledMapType = new google.maps.StyledMapType(
-     [
-         {
-             "featureType": "all",
-             "stylers": [
-                 {
-                     "saturation": 0
-                 },
-                 {
-                     "hue": "#e7ecf0"
-                 }
-             ]
-         },
-         {
-             "featureType": "road",
-             "stylers": [
-                 {
-                     "saturation": -70
-                 }
-             ]
-         },
-         {
-             "featureType": "transit",
-             "stylers": [
-                 {
-                     "visibility": "off"
-                 }
-             ]
-         },
-         {
-             "featureType": "poi",
-             "stylers": [
-                 {
-                     "visibility": "off"
-                 }
-             ]
-         },
-         {
-             "featureType": "water",
-             "stylers": [
-                 {
-                     "visibility": "simplified"
-                 },
-                 {
-                     "saturation": -60
-                 }
-             ]
-         }
+          [{"featureType": "all",
+        "stylers": [{"saturation": 0},
+                    {"hue": "#e7ecf0"}]},
+      {"featureType": "road",
+       "stylers": [{"saturation": -70}]},
+      {"featureType": "transit",
+       "stylers": [{"visibility": "off"}]},
+      {"featureType": "poi",
+       "stylers": [{"visibility": "off"}]},
+      {"featureType": "water",
+       "stylers": [{"visibility": "simplified"},
+        {"saturation": -60}]
+      }
      ],
      {name: 'Styled Map'});
 
@@ -111,7 +77,7 @@ function initMap() {
   map.mapTypes.set('styled_map', styledMapType);
   map.setMapTypeId('styled_map');
 
-  // loop throug db and mark each place
+  // loop through db and mark each place
   socket.emit('getTips');
   socket.on('renderMarkers', render);
   // click at a spot on the map and grab the coordinates, send it to router
@@ -119,7 +85,7 @@ function initMap() {
     // if add tip is toggled then allow post
     if(addTipToggle) {
       $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
-        var form = 'form content <input type="text">';
+        var form = $('#google-maps-form').html();
         var infoWindow = new google.maps.InfoWindow({
           content: form
         });
@@ -132,7 +98,14 @@ function initMap() {
         socket.on('renderMarkers', render);
       });
     }
-  });
+// submit button action
+    $('#map').on('click', '#submit', function(evt){
+      console.log('clicked!');
+      // socket.emit('submitData', {parkingType: $('#parkingTypeField').val()});
+      // socket.on();
+    });
+
+  }); // close addListener
 
 
   // Geocoder
@@ -162,10 +135,10 @@ function geocodeAddress(geocoder, resultsMap) {
 }
 
 $("[data-toggle=popover]").popover({
-    html: true,
+  html: true,
   content: function() {
-          return $('#popover-content').html();
-        }
+    return $('#popover-content').html();
+  }
 });
 
 $('#myModal').on('click',function(evt){
