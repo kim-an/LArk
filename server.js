@@ -37,7 +37,7 @@ app.use(methodOverride('_method'));
 app.use(session({
   secret: 'LArk',
   resave: false,
-  saveUnitialized: true
+  saveUninitialized: true
 }));
 
 // mount passport
