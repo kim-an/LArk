@@ -1,5 +1,6 @@
 var myLocation;
 var map;
+var socket = io();
 
 // TODO DISTRACT USER WHILE MAP IS LOADING AND CENTERING
 // navigator.geolocation.watchPosition(function(obj){
@@ -17,75 +18,80 @@ navigator.geolocation.watchPosition(function(obj){
   }
 });
 
-$(document).ready(function(){
-  var socket = io();
-  // send test event to server
-  socket.emit('test', {test: "testobject"});
-  // receive response from server
-  socket.on('test', function(data){
-    console.log(data);
-  });
-});
-
-
 $('#plus').on('click', function(){
   $('.submit-data').toggleClass('hidden');
 });
 
 
+function render(tips) {
+  tips.forEach(function(tip) {
+    var content = 'Add Content';
+    var infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+    var latLng = {lat: tip.coordinates.lat, lng: tip.coordinates.lng};
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker);
+    });
+  })
+}
 
 function initMap() {
- // styled map
-  var styledMapType = new google.maps.StyledMapType(
-    [
-        {
-            "featureType": "all",
-            "stylers": [
-                {
-                    "saturation": 0
-                },
-                {
-                    "hue": "#e7ecf0"
-                }
-            ]
-        },
-        {
-            "featureType": "road",
-            "stylers": [
-                {
-                    "saturation": -70
-                }
-            ]
-        },
-        {
-            "featureType": "transit",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "water",
-            "stylers": [
-                {
-                    "visibility": "simplified"
-                },
-                {
-                    "saturation": -60
-                }
-            ]
-        }
-    ],
-    {name: 'Styled Map'});
+  // styled map
+   var styledMapType = new google.maps.StyledMapType(
+     [
+         {
+             "featureType": "all",
+             "stylers": [
+                 {
+                     "saturation": 0
+                 },
+                 {
+                     "hue": "#e7ecf0"
+                 }
+             ]
+         },
+         {
+             "featureType": "road",
+             "stylers": [
+                 {
+                     "saturation": -70
+                 }
+             ]
+         },
+         {
+             "featureType": "transit",
+             "stylers": [
+                 {
+                     "visibility": "off"
+                 }
+             ]
+         },
+         {
+             "featureType": "poi",
+             "stylers": [
+                 {
+                     "visibility": "off"
+                 }
+             ]
+         },
+         {
+             "featureType": "water",
+             "stylers": [
+                 {
+                     "visibility": "simplified"
+                 },
+                 {
+                     "saturation": -60
+                 }
+             ]
+         }
+     ],
+     {name: 'Styled Map'});
 
   // TODO: need to dynamically change myLocation using location services
   var startLocation = {lat: 34.030935, lng: -118.266637};
@@ -98,6 +104,9 @@ function initMap() {
   map.mapTypes.set('styled_map', styledMapType);
   map.setMapTypeId('styled_map');
 
+  // loop throug db and mark each place
+  socket.emit('getTips');
+  socket.on('renderMarkers', render);
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
     $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
@@ -110,6 +119,8 @@ function initMap() {
         map: map
       });
       infoWindow.open(map, marker);
+      socket.emit('getTips');
+      socket.on('renderMarkers', render);
     });
   });
 
