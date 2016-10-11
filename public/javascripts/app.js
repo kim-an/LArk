@@ -110,7 +110,7 @@ function initMap() {
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
     $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
-      var form = 'form content <input type="text">';
+      var form = $('#google-maps-form').html();
       var infoWindow = new google.maps.InfoWindow({
         content: form
       });
