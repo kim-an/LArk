@@ -38,10 +38,20 @@ body {
 
 footer {
   padding: 1vw;
+  background-color: rgba(61, 88, 151, 1);
+}
+
+#footerNav {
+  width: 20vw;
+  margin: 0 auto;
 }
 
 li {
   display: inline;
+  padding: 1vw;
 }
 
+a {
+  color: white;
+}
 
