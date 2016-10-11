@@ -25,6 +25,58 @@
     </div>
     </nav>
     <div id="map"></div>
+      <template id="google-maps-form">
+        <div class="form-field">
+          Parking type: <input type="text">
+        </div>
+        <div class="form-field">
+          Valid hours:
+          <select name="validHours[day]">
+            <% ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].forEach(function(day){ %>
+              <option value="<%= day %>"><%= day %></option>
+            <% }) %>
+          </select>
+          <select name="validHours[startTime]">
+            <% for (var i = 1; i < 25; i++){ %>
+              <option value="<%= i %>">
+                <%= i > 12 ? i - 12 : i %>
+                <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+              </option>
+            <% }; %>
+          </select>
+          <select name="validHours[endTime]">
+            <% for (var i = 1; i < 25; i++){ %>
+              <option value="<%= i %>"><%= i %></option>
+            <% }; %>
+          </select>
+        </div>
+        <div class="form-field">
+          Max Time:
+          <select name="maxTime">
+            <% for (var i = 1; i < 25; i++){ %>
+              <option value="<%= i %>"><%= i %> <%= i < 2 ? 'hour':'hours' %></option>
+            <% }; %>
+          </select>
+        </div>
+        <div class="form-field">
+          <fieldset>
+            Permit:
+              <label for="required"><input type="radio" name="permit" value=true>Required</label>
+              <label for="not-required"><input type="radio" name="permit" value=false>Not required</label>
+          </fieldset>
+        </div>
+        <div class="form-field">
+          Cost:
+          $<input type="text">/hr
+        </div>
+        <div class="form-field">
+          Cost Exceptions:
+           <input type="text">
+        </div>
+        <div class="submit">
+        <button>Submit</button>
+        </div>
+    </template>
     <footer>
       <div>
         <nav>
