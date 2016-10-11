@@ -167,3 +167,7 @@ $("[data-toggle=popover]").popover({
           return $('#popover-content').html();
         }
 });
+
+$('#myModal').on('click',function(evt){
+  modal('show');
+});
