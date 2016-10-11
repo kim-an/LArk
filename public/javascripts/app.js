@@ -29,7 +29,7 @@ $(document).ready(function(){
 
 
 $('#plus').on('click', function(){
-  $('.submit-data').removeClass('hidden');
+  $('.submit-data').toggleClass('hidden');
 });
 
 
@@ -73,7 +73,7 @@ function initMap() {
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
     $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
-      var form = 'form content';
+      var form = 'form content <input type="text">';
       var infoWindow = new google.maps.InfoWindow({
         content: form
       });
