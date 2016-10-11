@@ -9,7 +9,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   margin: 0;
-  color: white;
 }
 
 #map {
@@ -24,6 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 .hidden {
@@ -33,5 +33,6 @@ body {
 .submit-data {
   background-color: rgba(61, 88, 151, 1);
   padding: 5px;
+  color: white;
 }
 
