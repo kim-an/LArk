@@ -8,82 +8,65 @@
   </head>
   <body>
     <nav>
-    <div id="topbar">
-      <div class="container">
-        <ul class="list-unstyled">
-          <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#myModal">About Us</a></li>
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content" id="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">About Us</h4>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Fusce at interdum sem. Morbi sagittis molestie enim egestas
-                    consequat. Interdum et malesuada fames ac ante ipsum
-                    primis in faucibus. Fusce tincidunt velit in justo
-                    eleifend, id eleifend diam dignissim. Suspendisse potenti.
-                    Ut non maximus lacus. In facilisis, eros at sollicitudin auctor,
-                    orci ipsum sagittis nisl, ut pharetra ligula tortor ac lectus.
-                    Etiam ultrices eget tellus in tristique. Sed ullamcorper
-                    volutpat tellus, a commodo arcu molestie sed.
-                    In pellentesque iaculis ullamcorper. Sed a consectetur
-                    libero. Aliquam blandit, ex in congue gravida, lectus odio
-                    pretium sapien, a pharetra diam sapien ac lacus. Duis in libero
-                    elit. Phasellus elementum tempus maximus.
-                  </p>
-                  <p>
-                    Curabitur rhoncus lectus quis nibh ultrices blandit. Class aptent
-                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                    himenaeos. Sed gravida metus at eros tempor egestas. Mauris luctus
-                    consequat nunc, in tempus magna venenatis vitae. Donec mattis nisi
-                    lacus, in euismod libero vehicula vestibulum. Duis enim nibh,
-                    rutrum at ante eget, volutpat scelerisque lorem. Sed rutrum risus
-                    non elit varius, vitae dictum metus accumsan.
-                  </p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <div id="topbar">
+        <div id="aboutus">
+          <ul class="list-unstyled">
+            <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#myModal">About Us</a></li>
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content" id="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">About Us</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Fusce at interdum sem. Morbi sagittis molestie enim egestas
+                      consequat. Interdum et malesuada fames ac ante ipsum
+                      primis in faucibus. Fusce tincidunt velit in justo
+                      eleifend, id eleifend diam dignissim. Suspendisse potenti.
+                      Ut non maximus lacus. In facilisis, eros at sollicitudin auctor,
+                      orci ipsum sagittis nisl, ut pharetra ligula tortor ac lectus.
+                      Etiam ultrices eget tellus in tristique. Sed ullamcorper
+                      volutpat tellus, a commodo arcu molestie sed.
+                      In pellentesque iaculis ullamcorper. Sed a consectetur
+                      libero. Aliquam blandit, ex in congue gravida, lectus odio
+                      pretium sapien, a pharetra diam sapien ac lacus. Duis in libero
+                      elit. Phasellus elementum tempus maximus.
+                    </p>
+                    <p>
+                      Curabitur rhoncus lectus quis nibh ultrices blandit. Class aptent
+                      taciti sociosqu ad litora torquent per conubia nostra, per inceptos
+                      himenaeos. Sed gravida metus at eros tempor egestas. Mauris luctus
+                      consequat nunc, in tempus magna venenatis vitae. Donec mattis nisi
+                      lacus, in euismod libero vehicula vestibulum. Duis enim nibh,
+                      rutrum at ante eget, volutpat scelerisque lorem. Sed rutrum risus
+                      non elit varius, vitae dictum metus accumsan.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
                 </div>
               </div>
+            </ul>
+          </div> <!-- closes container -->
+            <button id="add-tip">Add Tip</button>
+            <div>
+              <input id="address" type="text" name="street[address]">
+              &nbsp;
+              <button id="getAddress">Search</button>
             </div>
-          </ul>
-        </div> <!-- closes container -->
-    <div>
-      <input id="address" type="text" name="street[address]">
-      &nbsp;
-      <button id="getAddress">Search</button>
-    </div>
-    <ul class="left">
-      <% if (user) { %>
-        <li><a href="/logout">Logout</a></li>
-      <% } else { %>
-        <li><a href="/auth/google">Login with Google</a></li>
-      <% } %>
-    </ul>
-    <div id="plus">+</div>
-    <button id="add-tip">Add Tip</button>
-      <div>
-        <input id="address" type="text" name="street[address]">
-        &nbsp;
-        <button id="getAddress">Submit</button>
-      </div>
-      <ul class="left">
-        <% if (user) { %>
-          <li><a href="/logout">Logout</a></li>
-        <% } else { %>
-          <li><a href="/auth/google">Login with Google</a></li>
-        <% } %>
-      </ul>
-      <div id="plus">+</div>
-      <button id="add-tip">Add Tip</button>
-    </div>
-    <div class="submit-data hidden" id="display-time">
-      At what times is it alright to park here? From <input type="text" name="street[startTime]"> to <input type="text" name="street[endTime]">
-    </div>
+            <ul class="left">
+              <% if (user) { %>
+                <li><a href="/logout">Logout</a></li>
+              <% } else { %>
+                <li><a href="/auth/google">Login with Google</a></li>
+              <% } %>
+            </ul>
+            </div>
+          </div>
     </nav>
     <div id="map"></div>
       <template id="google-maps-form">
