@@ -3,6 +3,8 @@ var router = require('express').Router();
 var passport = require('passport');
 var usersController = require('../controllers/users');
 
+var Tip = require('../models/tip');
+
 /* GET home page. */
 
 router.get('/welcome', usersController.welcome);
@@ -28,6 +30,14 @@ router.get('/oauth2callback', passport.authenticate(
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
+});
+
+// create new tip based on click event
+router.post('/', function(req, res, next){
+  Tip.create({coordinates: req.body}, function(err, tip){
+    console.log(tip);
+    res.status(201).json(tip);
+  });
 });
 
 module.exports = router;

@@ -27,11 +27,11 @@ $(document).ready(function(){
   });
 });
 
-$(document).ready(function(){
-  $('#plus').on('click', function(){
-    $('.submit-data').removeClass('hidden');
-  });
+
+$('#plus').on('click', function(){
+  $('.submit-data').toggleClass('hidden');
 });
+
 
 // fake db
 var places = [
@@ -55,13 +55,34 @@ function initMap() {
   });
   // loop through fake db and mark each place
   places.forEach(function(place){
-    console.log(place);
+    // TODO put in value of comments key from real DB (move this to controller?)
+    var content = 'Yo I live here';
+    var infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
     var latLng = {lat: place.latitude, lng: place.longitude};
     var marker = new google.maps.Marker({
       position: latLng,
       map: map
     });
-    console.log(marker);
+    marker.addListener('click', function(){
+      infoWindow.open(map, marker);
+    });
+  });
+
+  // click at a spot on the map and grab the coordinates, send it to router
+  map.addListener('click', function(evt){
+    $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
+      var form = 'form content <input type="text">';
+      var infoWindow = new google.maps.InfoWindow({
+        content: form
+      });
+      var marker = new google.maps.Marker({
+        position: tip.coordinates,
+        map: map
+      });
+      infoWindow.open(map, marker);
+    });
   });
 
   // Geocoder
@@ -89,7 +110,3 @@ function geocodeAddress(geocoder, resultsMap) {
     }
   });
 }
-
-
-
-

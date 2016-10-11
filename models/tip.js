@@ -2,19 +2,19 @@ var mongoose = require('mongoose');
 
 var tipSchema = new mongoose.Schema({
   userID: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true
+    type: mongoose.Schema.Types.ObjectId
+    // required: true
   },
   parkingType: {
     type: String,
     enum: ['Street', 'Outdoor Lot', 'Indoor Lot']
   },
   coordinates: {
-    type: {
+    // {
       lat: Number,
       lng: Number
-    },
-    required: true
+    // }
+    // required: true
   },
   comment: {
     message: String,
@@ -35,8 +35,8 @@ var tipSchema = new mongoose.Schema({
     }
   ],
   permit: {
-    type: Boolean,
-    required: true
+    type: Boolean
+    // required: true
   },
   cost: String,
   costExceptions: [String],
