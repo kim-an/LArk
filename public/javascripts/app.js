@@ -1,4 +1,21 @@
-console.log('linked!');
+var myLocation;
+var map;
+
+// TODO DISTRACT USER WHILE MAP IS LOADING AND CENTERING
+// navigator.geolocation.watchPosition(function(obj){
+//   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
+//   initMap(myLocation);
+// });
+
+navigator.geolocation.watchPosition(function(obj){
+  myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
+  console.log(myLocation);
+  if (map){
+    map.panTo(myLocation);
+  } else {
+    console.log('map doesnt exist yet');
+  }
+});
 
 $(document).ready(function(){
   var socket = io();
@@ -31,10 +48,10 @@ var places = [
 
 function initMap() {
   // TODO: need to dynamically change myLocation using location services
-  var myLocation = {lat: 34.030935, lng: -118.266637};
-  var map = new google.maps.Map(document.getElementById('map'), {
+  var startLocation = {lat: 34.030935, lng: -118.266637};
+  map = new google.maps.Map(document.getElementById('map'), {
     zoom: 18,
-    center: myLocation
+    center: startLocation
   });
   // loop through fake db and mark each place
   places.forEach(function(place){
