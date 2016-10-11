@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/style.css">
-
+    <link rel="javascript" href="javascripts/index.js">
   </head>
   <body>
     <nav>
@@ -16,9 +17,7 @@
         <li><a href="/auth/google">Login with Google</a></li>
       <% } %>
     </ul>
-        <input id="address" type="text" name="street[address]">
-        &nbsp;
-        <button id="getAddress">Submit</button>
+
     <div id="plus">+</div>
     </div>
     <div class="submit-data hidden" id="display-time">
@@ -26,11 +25,32 @@
     </div>
     </nav>
     <div id="map"></div>
-    <script src="/socket.io/socket.io.js"></script>
+    <footer>
+      <div>
+        <nav>
+          <div class="container">
+            <ul class="list-unstyled">
+              <li><a data-placement="top" data-toggle="popover" data-title="Address Search" data-container="body" type="button" data-html="true" href="#">Search</a></li>
+              <div id="popover-content" class="hide">
+                <form class="form-inline" role="form">
+                  <div class="form-group">
+                    <input id="address" type="text" name="street[address]">
+                    &nbsp;
+                    <button id="getAddress">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </footer>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="javascripts/app.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap">
     </script>
+    <script src="javascripts/app.js"></script>
   </body>
 </html>
