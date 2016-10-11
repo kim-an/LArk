@@ -116,7 +116,7 @@ function initMap() {
   socket.on('renderMarkers', render);
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
-    // if add tip is toggled then allow post
+    //
     if(addTipToggle) {
       $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
         var form = 'form content <input type="text">';
@@ -130,7 +130,6 @@ function initMap() {
         infoWindow.open(map, marker);
         socket.emit('getTips');
         socket.on('renderMarkers', render);
-
       });
     }
   });
