@@ -33,18 +33,6 @@ $('#plus').on('click', function(){
 });
 
 
-// fake db
-var places = [
-  {
-    "latitude": 34.030935,
-    "longitude": -118.26663732
-  },
-  {
-    "latitude": 34.0305689,
-    "longitude": -118.2663225
-  }
-];
-
 
 function initMap() {
  // styled map
@@ -109,22 +97,6 @@ function initMap() {
   // associating the styled map w/existing map
   map.mapTypes.set('styled_map', styledMapType);
   map.setMapTypeId('styled_map');
-  // loop through fake db and mark each place
-  places.forEach(function(place){
-    // TODO put in value of comments key from real DB (move this to controller?)
-    var content = 'Yo I live here';
-    var infoWindow = new google.maps.InfoWindow({
-      content: content
-    });
-    var latLng = {lat: place.latitude, lng: place.longitude};
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: map
-    });
-    marker.addListener('click', function(){
-      infoWindow.open(map, marker);
-    });
-  });
 
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
