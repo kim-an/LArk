@@ -12,7 +12,7 @@ body {
 }
 
 #map {
-  height: 85vh;
+  height: 90vh;
   width: 100vw;
 }
 
@@ -23,7 +23,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
 }
 
 .hidden {
@@ -33,25 +32,10 @@ body {
 .submit-data {
   background-color: rgba(61, 88, 151, 1);
   padding: 5px;
-  color: white;
-}
-
-footer {
-  padding: 1vw;
-  background-color: rgba(61, 88, 151, 1);
-}
-
-#footerNav {
-  width: 20vw;
-  margin: 0 auto;
 }
 
 li {
   display: inline;
   padding: 1vw;
-}
-
-a {
-  color: white;
 }
 
