@@ -4,28 +4,61 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="stylesheets/style.css">
-
   </head>
   <body>
     <nav>
-    <div id="topbar">
-    <ul class="left">
-      <% if (user) { %>
-        <li><a href="/logout">Logout</a></li>
-      <% } else { %>
-        <li><a href="/auth/google">Login with Google</a></li>
-      <% } %>
-    </ul>
+      <div id="topbar">
+        <ul class="left">
+          <% if (user) { %>
+            <li><a href="/logout">Logout</a></li>
+          <% } else { %>
+            <li><a href="/auth/google">Login with Google</a></li>
+          <% } %>
+        </ul>
         <input id="address" type="text" name="street[address]">
         &nbsp;
         <button id="getAddress">Submit</button>
-    <div id="plus">+</div>
-    </div>
-    <div class="submit-data hidden" id="display-time">
-      At what times is it alright to park here? From <input type="text" name="street[startTime]"> to <input type="text" name="street[endTime]">
-    </div>
+        <div id="plus">+</div>
+      </div><!-- /#topbar -->
+      <div class="submit-data hidden" id="display-time">
+        At what times is it alright to park here?
+        From <input type="text" name="street[startTime]"> to <input type="text" name="street[endTime]">
+      </div>
     </nav>
     <div id="map"></div>
+    <template id="google-maps-form">
+      <div class="form-field">
+        Parking type: <input type="text">
+      </div>
+      <div class="form-field">
+        Valid hours:
+        <select name="validHours[day]">
+          <% ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].forEach(function(day){ %>
+            <option value="<%= day %>"><%= day %></option>
+          <% }) %>
+        </select>
+        <select name="validHours[startTime]">
+          <% for (var i = 1; i < 25; i++){ %>
+            <option value="<%= i %>">
+              <%= i > 12 ? i - 12 : i %>
+              <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+            </option>
+          <% }; %>
+        </select>
+        <select name="validHours[endTime]">
+          <% for (var i = 1; i < 25; i++){ %>
+            <option value="<%= i %>"><%= i %></option>
+          <% }; %>
+        </select>
+      </div>
+      <div class="form-field">
+        <select name="maxTime">
+          <% for (var i = 1; i < 25; i++){ %>
+            <option value="<%= i %>"><%= i %> hour</option>
+          <% }; %>
+        </select>
+      </div>
+  </template>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="javascripts/app.js"></script>
