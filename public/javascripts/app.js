@@ -37,22 +37,22 @@ function render(tips) {
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
     });
-  })
+  });
 }
 
 function initMap() {
   // styled map
-   var styledMapType = new google.maps.StyledMapType(
-     [
-         {
-             "featureType": "all",
-             "stylers": [
-                 {
-                     "saturation": 0
-                 },
-                 {
-                     "hue": "#e7ecf0"
-                 }
+  var styledMapType = new google.maps.StyledMapType(
+    [
+      {
+        "featureType": "all",
+        "stylers": [
+          {
+            "saturation": 0
+             },
+             {
+                 "hue": "#e7ecf0"
+             }
              ]
          },
          {
@@ -104,7 +104,7 @@ function initMap() {
   map.mapTypes.set('styled_map', styledMapType);
   map.setMapTypeId('styled_map');
 
-  // loop throug db and mark each place
+  // loop through db and mark each place
   socket.emit('getTips');
   socket.on('renderMarkers', render);
   // click at a spot on the map and grab the coordinates, send it to router
@@ -123,6 +123,8 @@ function initMap() {
       socket.on('renderMarkers', render);
     });
   });
+
+
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();
@@ -151,8 +153,8 @@ function geocodeAddress(geocoder, resultsMap) {
 }
 
 $("[data-toggle=popover]").popover({
-    html: true,
+  html: true,
   content: function() {
-          return $('#popover-content').html();
-        }
+    return $('#popover-content').html();
+  }
 });
