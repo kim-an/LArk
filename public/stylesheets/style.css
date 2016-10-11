@@ -12,7 +12,7 @@ body {
 }
 
 #map {
-  height: 90vh;
+  height: 85vh;
   width: 100vw;
 }
 
@@ -35,4 +35,10 @@ body {
   padding: 5px;
   color: white;
 }
+
+footer {
+  padding: 1vw;
+}
+
+
 

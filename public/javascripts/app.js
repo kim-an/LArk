@@ -2,6 +2,13 @@ var myLocation;
 var map;
 var socket = io();
 
+// toggle add tip button
+var addTipToggle = false;
+var $addTip = $('#add-tip')
+$addTip.on('click', function(){
+ addTipToggle = true;
+});
+
 // TODO DISTRACT USER WHILE MAP IS LOADING AND CENTERING
 // navigator.geolocation.watchPosition(function(obj){
 //   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
@@ -75,20 +82,24 @@ function initMap() {
   socket.on('renderMarkers', render);
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
-    $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
-      var form = 'form content <input type="text">';
-      var infoWindow = new google.maps.InfoWindow({
-        content: form
+    // if add tip is toggled then allow post
+    if(addTipToggle) {
+      $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
+        var form = 'form content <input type="text">';
+        var infoWindow = new google.maps.InfoWindow({
+          content: form
+        });
+        var marker = new google.maps.Marker({
+          position: tip.coordinates,
+          map: map
+        });
+        infoWindow.open(map, marker);
+        socket.emit('getTips');
+        socket.on('renderMarkers', render);
       });
-      var marker = new google.maps.Marker({
-        position: tip.coordinates,
-        map: map
-      });
-      infoWindow.open(map, marker);
-      socket.emit('getTips');
-      socket.on('renderMarkers', render);
-    });
+    }
   });
+
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();
@@ -115,3 +126,10 @@ function geocodeAddress(geocoder, resultsMap) {
     }
   });
 }
+
+$("[data-toggle=popover]").popover({
+    html: true,
+  content: function() {
+          return $('#popover-content').html();
+        }
+});
