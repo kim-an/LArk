@@ -1,19 +1,11 @@
 var myLocation;
 var map;
 var socket = io();
-
 // toggle add tip button
 var addTipToggle = false;
-var $addTip = $('#add-tip')
-$addTip.on('click', function(){
- addTipToggle = true;
-});
 
-// TODO DISTRACT USER WHILE MAP IS LOADING AND CENTERING
-// navigator.geolocation.watchPosition(function(obj){
-//   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
-//   initMap(myLocation);
-// });
+var $addTip = $('#add-tip');
+var $plus = $('#plus');
 
 navigator.geolocation.watchPosition(function(obj){
   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
@@ -24,11 +16,6 @@ navigator.geolocation.watchPosition(function(obj){
     console.log('map doesnt exist yet');
   }
 });
-
-$('#plus').on('click', function(){
-  $('.submit-data').toggleClass('hidden');
-});
-
 
 function render(tips) {
   tips.forEach(function(tip) {
@@ -49,19 +36,32 @@ function render(tips) {
 
 function initMap() {
   // styled map
-   var styledMapType = new google.maps.StyledMapType(
-          [{"featureType": "all",
-        "stylers": [{"saturation": 0},
-                    {"hue": "#e7ecf0"}]},
-      {"featureType": "road",
-       "stylers": [{"saturation": -70}]},
-      {"featureType": "transit",
-       "stylers": [{"visibility": "off"}]},
-      {"featureType": "poi",
-       "stylers": [{"visibility": "off"}]},
-      {"featureType": "water",
-       "stylers": [{"visibility": "simplified"},
-        {"saturation": -60}]
+   var styledMapType = new google.maps.StyledMapType([
+      {
+        "featureType": "all",
+        "stylers": [
+          {"saturation": 0},
+          {"hue": "#e7ecf0"}
+        ]
+      },
+      {
+        "featureType": "road",
+        "stylers": [{"saturation": -70}]
+      },
+      {
+        "featureType": "transit",
+        "stylers": [{"visibility": "off"}]
+      },
+      {
+        "featureType": "poi",
+        "stylers": [{"visibility": "off"}]
+      },
+      {
+        "featureType": "water",
+        "stylers": [
+          {"visibility": "simplified"},
+          {"saturation": -60}
+        ]
       }
      ],
      {name: 'Styled Map'});
@@ -80,9 +80,10 @@ function initMap() {
   // loop through db and mark each place
   socket.emit('getTips');
   socket.on('renderMarkers', render);
+
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
-    // if add tip is toggled then allow post
+    //
     if(addTipToggle) {
       $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
         var form = $('#google-maps-form').html();
@@ -94,32 +95,29 @@ function initMap() {
           map: map
         });
         infoWindow.open(map, marker);
-        socket.emit('getTips');
-        socket.on('renderMarkers', render);
+        // not necessary?
+        // socket.emit('getTips');
+        // socket.on('renderMarkers', render);
       });
     }
-// submit button action
-    $('#map').on('click', '#submit', function(evt){
-      console.log('clicked!');
-      // socket.emit('submitData', {parkingType: $('#parkingTypeField').val()});
-      // socket.on();
-    });
-
   }); // close addListener
-
-
   // Geocoder
   var geocoder = new google.maps.Geocoder();
+
   // Click event to go to address
-  document.getElementById('getAddress').addEventListener('click', function() {
+  $('body').on('click', '#getAddress', function(e) {
+    console.log('get address...');
+    e.preventDefault();
     geocodeAddress(geocoder, map);
   });
 }
 
 function geocodeAddress(geocoder, resultsMap) {
   var address = document.getElementById('address').value;
+  console.log(address);
   geocoder.geocode({'address': address}, function(results, status) {
     // use results[0].geometry.location.lat(), results[0].geometry.location.lng() to get lat/long
+    console.log(results);
     console.log(results[0].geometry.location.lat());
     console.log(results[0].geometry.location.lng());
     if (status === 'OK') {
@@ -134,11 +132,13 @@ function geocodeAddress(geocoder, resultsMap) {
   });
 }
 
-$("[data-toggle=popover]").popover({
-  html: true,
-  content: function() {
-    return $('#popover-content').html();
-  }
+
+$addTip.on('click', function(){
+ addTipToggle = true;
+});
+
+$plus.on('click', function(){
+  $('.submit-data').toggleClass('hidden');
 });
 
 $('#myModal').on('click',function(evt){
