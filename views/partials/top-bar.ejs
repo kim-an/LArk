@@ -43,14 +43,11 @@
           </div>
         </ul>
       </div> <!-- closes container -->
+        <!-- check to see if user is logged in to add tip -->
         <% if (user) { %>
           <button id="add-tip">Add Tip</button>
         <% } %>
-        <div>
-          <input id="address" type="text" name="street[address]">
-          &nbsp;
-          <button id="getAddress">Search</button>
-        </div>
+        <!-- check to see if user is logged in or out -->
         <ul class="left">
           <% if (user) { %>
             <li><a href="/logout">Logout</a></li>
