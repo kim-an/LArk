@@ -90,6 +90,8 @@ function initMap() {
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
     if(addTipToggle) {
+      // disable add-tip
+      addTipToggle = false;
       clickLat = evt.latLng.lat();
       clickLng = evt.latLng.lng();
 
