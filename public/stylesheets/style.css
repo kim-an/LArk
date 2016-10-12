@@ -23,6 +23,14 @@ a {
   color: white;
 }
 
+#log-in {
+  padding-left: 1005px;
+}
+
+#log-out {
+  padding-left: 1005px;
+}
+
 #about-us {
   width: 10vw;
 }
@@ -30,6 +38,13 @@ a {
 #add-tip {
   margin-left: 10vw;
   margin-right: 15vw;
+}
+
+#tip-button {
+  position: absolute;
+  top: 10px;
+  left: 95vw;
+  z-index: 99;
 }
 
 #address {
@@ -52,8 +67,8 @@ a {
   margin-right: 10vw;
 }
 
-.left {
-  margin-left: 15vw;
+#wrapper {
+  position: relative;
 }
 
 #map {

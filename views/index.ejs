@@ -13,7 +13,10 @@
   </head>
   <body>
     <% include ./partials/top-bar %>
-    <div id="map"></div>
+    <div id="wrapper">
+     <div id="map"></div>
+    <% include ./partials/add-tip-button %>
+    </div>
     <input id="address" type="text" class="controls" name="street[address]" placeholder="Enter a location">
     <% include ./partials/add-tip-form %>
     <% include ./partials/tip-info %>
