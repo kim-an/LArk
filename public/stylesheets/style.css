@@ -84,6 +84,6 @@ li {
   padding: 1vw;
 }
 
-#info-box {
-  background-color: rgba(61, 88, 151, .5);
+#valid-hours {
+  vertical-align: top;
 }
