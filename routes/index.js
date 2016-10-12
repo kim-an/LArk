@@ -33,7 +33,7 @@ router.get('/logout', function(req, res) {
 });
 
 // create new tip based on click event
-router.post('/tips', function(req, res, next){
+router.post('/tips', isLoggedIn, function(req, res, next){
   Tip.create({
     parkingType: req.body.parkingType,
     coordinates: {lat: req.body.coordinatesLat, lng: req.body.coordinatesLng},
@@ -56,4 +56,10 @@ router.put('/', function(req, res, next){
 });
 
 module.exports = router;
+
+// check to see if user is logged in
+function isLoggedIn(req, res, next) {
+  if ( req.isAuthenticated() ) return next();
+  res.redirect('/auth/google');
+}
 
