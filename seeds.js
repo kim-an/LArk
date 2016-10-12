@@ -27,8 +27,7 @@ Promise.all([
     costExceptions: [],
     maxTime: '4hrs'
   });
-  tip1.save().then(function() {
-  });
+  return tip1.save()
 }).then(function() {
   var tip2 = new Tip({
     userID: "57fc315af5eca32f92259e4a",
@@ -49,8 +48,7 @@ Promise.all([
     costExceptions: [],
     maxTime: '4hrs'
   });
-  tip2.save().then(function() {
-  });
+  return tip2.save()
 }).then(function() {
   var tip3 = new Tip({
     userID: "57fc315af5eca32f92259e4a",
@@ -70,9 +68,10 @@ Promise.all([
     cost: '$10/day',
     costExceptions: ['$5 after 4pm']
   });
-  tip3.save().then(function() {
-    process.exit();
-  });
+  return tip3.save()
+}).catch(function(err){
+  console.log(err);
+}).then(function(){
+  process.exit();
 });
-
 
