@@ -171,5 +171,5 @@ $plus.on('click', function(){
 });
 
 $('#myModal').on('click',function(evt){
-  modal('show');
+  $('#modal-content').modal('hide');
 });
