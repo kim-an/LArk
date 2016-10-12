@@ -7,6 +7,9 @@ var addTipToggle = false;
 var $addTip = $('#add-tip');
 var $plus = $('#plus');
 
+var arrTips = [];
+
+//TODO have option to clear this
 navigator.geolocation.watchPosition(function(obj){
   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
   console.log(myLocation);
@@ -36,34 +39,34 @@ function render(tips) {
 
 function initMap() {
   // styled map
-   var styledMapType = new google.maps.StyledMapType([
-      {
-        "featureType": "all",
-        "stylers": [
-          {"saturation": 0},
-          {"hue": "#e7ecf0"}
-        ]
-      },
-      {
-        "featureType": "road",
-        "stylers": [{"saturation": -70}]
-      },
-      {
-        "featureType": "transit",
-        "stylers": [{"visibility": "off"}]
-      },
-      {
-        "featureType": "poi",
-        "stylers": [{"visibility": "off"}]
-      },
-      {
-        "featureType": "water",
-        "stylers": [
-          {"visibility": "simplified"},
-          {"saturation": -60}
-        ]
-      }
-     ],
+  var styledMapType = new google.maps.StyledMapType([
+    {
+      "featureType": "all",
+      "stylers": [
+        {"saturation": 0},
+        {"hue": "#e7ecf0"}
+      ]
+    },
+    {
+      "featureType": "road",
+      "stylers": [{"saturation": -70}]
+    },
+    {
+      "featureType": "transit",
+      "stylers": [{"visibility": "off"}]
+    },
+    {
+      "featureType": "poi",
+      "stylers": [{"visibility": "off"}]
+    },
+    {
+      "featureType": "water",
+      "stylers": [
+        {"visibility": "simplified"},
+        {"saturation": -60}
+      ]
+    }
+  ],
      {name: 'Styled Map'});
 
   // TODO: need to dynamically change myLocation using location services
@@ -83,41 +86,49 @@ function initMap() {
 
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
-    //
     if(addTipToggle) {
-      $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
-        console.log(tip.coordinates);
-        var form = $('#google-maps-form').html();
-        var infoWindow = new google.maps.InfoWindow({
-          content: form
-        });
-        var marker = new google.maps.Marker({
-          position: tip.coordinates,
-          map: map
-        });
-        infoWindow.open(map, marker);
+      clickLat = evt.latLng.lat();
+      clickLng = evt.latLng.lng();
+
+      var form = $('#google-maps-form').html();
+      var infoWindow = new google.maps.InfoWindow({
+        content: form
+      });
+
+      var marker = new google.maps.Marker({
+        position: {lat: clickLat, lng: clickLng},
+        map: map
+      });
+
+      infoWindow.open(map, marker);
         // not necessary?
         // socket.emit('getTips');
         // socket.on('renderMarkers', render);
-        var lat = evt.latLng.lat();
-        var lng = evt.latLng.lng();
-        newTip = {
-          parkingType: $('#parkingTypeField').val(),
-          coordinates: {lat, lng},
-          validHours: [{ day: $('#validHoursDayField').val()}, {startTime: $('#validHoursStartTimeField').val()}, {endTime: $('#validHoursEndTimeField').val()}],
-          maxTime: $('#maxTimeField').val(),
-          permit: $('input[name="permit"]:checked').val(),
-          costField: $('#costField').val(),
-          costException: $('#costExceptionField').val()
-        };
-      });
-    }
+    } // close addTipToggle
   }); // close addListener
 
 // submit button action
   $('#map').on('click', '#submit', function(evt){
-    console.log('clicked');
+    newTip = {
+      parkingType: $('#parkingTypeField').val(),
+      coordinatesLat: clickLat,
+      coordinatesLng: clickLng,
+      validHoursDay: $('#validHoursDayField').val(),
+      validHoursStart: $('#validHoursStartTimeField').val(),
+      validHoursEnd: $('#validHoursEndTimeField').val(),
+      maxTime: $('#maxTimeField').val(),
+      permit: $('input[name="permit"]:checked').val(),
+      costField: $('#costField').val(),
+      costExceptions: $('#costExceptionField').val()
+    }; // close newTip object
+    console.log('this is from the client: ' + newTip);
+    arrTips.push(newTip);
+    $.post('/tips', newTip, function(tip){
+      console.log(tip);
+    }); // close post
   });
+
+
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();
@@ -152,7 +163,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
 $addTip.on('click', function(){
- addTipToggle = true;
+  addTipToggle = true;
 });
 
 $plus.on('click', function(){

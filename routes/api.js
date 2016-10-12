@@ -3,6 +3,6 @@ var tipsCtrl = require('../controllers/tips');
 
 router.get('/tips', tipsCtrl.index);
 
-router.get('/tips/:id', tipsCtrl.show)
+router.get('/tips/:id', tipsCtrl.show);
 
 module.exports = router;

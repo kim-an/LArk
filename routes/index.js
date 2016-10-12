@@ -33,11 +33,22 @@ router.get('/logout', function(req, res) {
 });
 
 // create new tip based on click event
-router.post('/', function(req, res, next){
-  Tip.create({coordinates: req.body}, function(err, tip){
-    console.log(tip);
-    res.status(201).json(tip);
-  });
+router.post('/tips', function(req, res, next){
+  Tip.create({
+    parkingType: req.body.parkingType,
+    coordinates: {lat: req.body.coordinatesLat, lng: req.body.coordinatesLng},
+    validHours: {day: req.body.validHoursDay,
+                startTime: req.body.validHoursStart,
+                endTime: req.body.validHoursEnd},
+    maxTime: req.body.maxTime,
+    permit: req.body.permit,
+    costField: req.body.costField,
+    costExceptions: req.body.costExceptions
+  },
+    function (err, tip) {
+      res.status(201).json(tip);
+    }
+  );
 });
 
 router.put('/', function(req, res, next){

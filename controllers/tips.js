@@ -8,7 +8,7 @@ module.exports = {
 function index(req, res) {
   Tip.find({}, function(err, tips) {
     if (err) return res.status(err.statusCode || 500).json(err);
-    res.json(tips);
+    res.status(200).json(tips);
   });
 }
 
@@ -16,6 +16,6 @@ function show(req, res) {
   var id = req.params.id;
   Tip.findById(id, function(err, tip) {
     if (err) return res.status(err.statusCode || 500).json(err);
-    res.json(tip);
+    res.status(200).json(tip);
   });
 }
