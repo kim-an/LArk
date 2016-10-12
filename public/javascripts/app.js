@@ -27,7 +27,6 @@ function render(tips) {
     var html = template(tip);
     var validHoursLength = tip.validHours.length - 1;
     var hoursArr = tip.validHours;
-    console.log(hoursArr);
     Handlebars.registerHelper('each', function(tip, options){
       var ret = "";
       for (var i = 0, j = validHoursLength; i < j; i++){
@@ -202,21 +201,6 @@ function initMap() {
       infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
       infowindow.open(map, marker);
     });
-
-    // Sets a listener on a radio button to change the filter type on Places
-    // Autocomplete.
-    // function setupClickListener(id, types) {
-    //   var radioButton = document.getElementById(id);
-    //   radioButton.addEventListener('click', function() {
-    //     autocomplete.setTypes(types);
-    //   });
-    // }
-
-    setupClickListener('changetype-all', []);
-    setupClickListener('changetype-address', ['address']);
-    setupClickListener('changetype-establishment', ['establishment']);
-    setupClickListener('changetype-geocode', ['geocode']);
-
 } //close function init map
 
 function geocodeAddress(geocoder, resultsMap) {
