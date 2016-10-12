@@ -43,7 +43,9 @@
           </div>
         </ul>
       </div> <!-- closes container -->
-        <button id="add-tip">Add Tip</button>
+        <% if (user) { %>
+          <button id="add-tip">Add Tip</button>
+        <% } %>
         <div>
           <input id="address" type="text" name="street[address]">
           &nbsp;
