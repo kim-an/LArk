@@ -1,5 +1,5 @@
 <template id="tip-info">
-  <div class="form-group">
+  <div class="form-field text-primary">
     <p>Parking Type: {{parkingType}}</p>
     <p>Valid Hours:<br>
     {{#each validHours}}{{day}}: {{startTime}} to {{endTime}}<br>{{/each}}</p>
@@ -8,5 +8,11 @@
     <p>Permit: {{permit}} </p>
     <p>Comment: {{comment.message}}</p>
   </div>
+  <% if (user) { %>
+    <div class="form-inline">
+      <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+      <button type="submit" class="btn btn-danger btn-sm">Flag</button>
+    </div>
+  <% } %>
 </template>
 
