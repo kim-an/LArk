@@ -7,8 +7,6 @@ var Tip = require('../models/tip');
 
 /* GET home page. */
 
-router.get('/welcome', usersController.welcome);
-
 router.get('/', usersController.index);
 
 // Google OAuth login route
