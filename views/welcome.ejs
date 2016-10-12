@@ -1,39 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="stylesheets/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-  <script src="https://apis.google.com/js/api:client.js"></script>
-  <title>LArk</title>
-</head>
-<body>
-<header>
-   <div class="jumbotron" id="title">
-    <h1 class="animated slideInRight">LArk</h1>
-  </div>
-</header>
-  <div id="intro">
-  <div class="page-header">
-    <h1>Park cheap. Park safe.</h1>
-  </div>
-  <div class="container">
-    <ul class="list-group">
-      <li class="list-group-item">
-        <p><img src="http://i.imgur.com/JhdS0bGt.jpg" alt="" class="img-rounded"/>Know which streets to park on.</p>
-      </li><br>
-      <li class="list-group-item">
-        <p><img src="http://i.imgur.com/FwjTyvxt.jpg" alt="" class="img-rounded"/>Know immediately which streets are free to park on which require permits and how long you can park there. </p>
-      </li><br>
-      <li class="list-group-item">
-        <p><img src="http://i.imgur.com/7hCGOyjt.jpg" alt="" class="img-rounded"/>Earn points by submitting information about your city.</p>
-      </li>
-    </ul>
-  </div>
-  <footer>
-      <button type="button" class="btn btn-primary btn-block"><a href="/auth/google">Login with Google</button>
-  </footer>
-</body>
-</html>
+<div id="lark-welcome">
+  <ul class="list-unstyled">
+    <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#larkModal">LArk</a></li>
+      <div class="modal fade" id="larkModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" id="modal-content">
+            <div class="modal-header">
+              <div class="jumbotron" id="title">
+                <h1 class="animated slideInRight">LArk</h1>
+              </div>
+            </div> <!-- closes modal-header -->
+            <div class="modal-body">
+              <div id="intro">
+                <div class="page-header">
+                    <h1>Park cheap. Park safe.</h1>
+                </div>
+                <div class="jumbotron jumbotron-fluid">
+                  <div class="container">
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <p><img src="http://i.imgur.com/JhdS0bGt.jpg" alt="" class="img-rounded"/>Know which streets to park on.</p>
+                      </li><br>
+                      <li class="list-group-item">
+                        <p><img src="http://i.imgur.com/FwjTyvxt.jpg" alt="" class="img-rounded"/>Know immediately which streets are free to park on which require permits and how long you can park there. </p>
+                      </li><br>
+                      <li class="list-group-item">
+                        <p><img src="http://i.imgur.com/7hCGOyjt.jpg" alt="" class="img-rounded"/>Earn points by submitting information about your city.</p>
+                      </li>
+                    </ul>
+                  </div> <!-- close container -->
+                </div> <!-- close jumbotron-fluid -->
+              </div> <!-- closes intro -->
+            </div> <!-- closes modal-body -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div> <!-- closes modal-content -->
+      </div> <!-- modal-dialog modal-lg -->
+    </div> <!-- closes modal-fade -->
+  </ul> <!-- closes list-unstyled -->
+</div> <!-- close id lark-welcome -->
