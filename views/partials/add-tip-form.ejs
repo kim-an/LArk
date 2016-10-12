@@ -1,10 +1,10 @@
 <template id="google-maps-form">
   <div class="container">
     <div class="row">
-      <h5>Add Tip</h5>
+      <h4>Add Tip</h4>
     </div>
     <div class="row">
-      <div class="col-xs-2">
+      <div class="col-xs-3">
         Parking type:
       </div>
       <div class="col-xs-3">
@@ -16,10 +16,10 @@
       </div>
     </div>
   <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-3">
       Valid hours:
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-9">
       <select name="validHours[day]" id="validHoursDayField">
         <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
           <option value="<%= day %>"><%= day %></option>
@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-3">
       Max Time:
     </div>
     <div class="col-xs-3">
@@ -57,24 +57,40 @@
       </select>
     </div>
   </div>
-  <div class="form-field">
-    <fieldset>
-      Permit:
-        <label for="required"><input type="radio" name="permit" value=true checked>Required</label>
-        <label for="not-required"><input type="radio" name="permit" value=false>Not required</label>
-    </fieldset>
+  <div class="row">
+    <div class="col-xs-3">
+        Permit:
+    </div>
+    <div class="col-xs-9"
+      <fieldset>
+          <label for="required"><input type="radio" name="permit" value=true checked>Required</label>
+          <label for="not-required"><input type="radio" name="permit" value=false>Not required</label>
+      </fieldset>
+    </div>
   </div>
-  <div class="form-field">
-    Cost:
-    $<input type="text" id="costField">/hr
+  <div class="row">
+    <div class="col-xs-3">
+      Cost:
+    </div>
+    <div class="col-xs-3">
+      $<input type="text" id="costField">/hr
+    </div>
   </div>
-  <div class="form-field">
-    Cost Exceptions:
+  <div class="row">
+    <div class="col-xs-3">
+      Cost Exceptions:
+    </div>
+    <div class="col-xs-3">
      <input type="text" id="costExceptionField">
+    </div>
   </div>
-  <div class="form-field">
-    Comments:
+  <div class="row">
+    <div class="col-xs-3">
+      Comments:
+    </div>
+    <div class="col-xs-6">
       <textarea cols="20" rows="5" id="commentsField"></textarea>
+    </div>
   </div>
   <div class="submit-field">
     <button id="submit">Submit</button>

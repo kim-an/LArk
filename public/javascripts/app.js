@@ -98,6 +98,8 @@ function initMap() {
 
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
+    socket.emit('getTips');
+    socket.on('renderMarkers', render);
     if(addTipToggle) {
       // disable add-tip
       addTipToggle = false;
@@ -116,8 +118,6 @@ function initMap() {
 
       infoWindow.open(map, marker);
         // not necessary?
-        // socket.emit('getTips');
-        // socket.on('renderMarkers', render);
     } // close addTipToggle
   }); // close addListener
 
