@@ -22,6 +22,9 @@ navigator.geolocation.watchPosition(function(obj){
 
 function render(tips) {
   tips.forEach(function(tip) {
+    // Push each tip into client-side array
+    arrTips.push(tip);
+    // TODO: load html template
     var content = 'Add Content';
     var infoWindow = new google.maps.InfoWindow({
       content: content
