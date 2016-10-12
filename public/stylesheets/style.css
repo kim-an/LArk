@@ -84,7 +84,6 @@ li {
   padding: 1vw;
 }
 
-a {
-  color: white;
+#info-box {
+  background-color: rgba(61, 88, 151, .5);
 }
-

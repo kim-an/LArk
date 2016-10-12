@@ -22,12 +22,21 @@ navigator.geolocation.watchPosition(function(obj){
 
 function render(tips) {
   tips.forEach(function(tip) {
-    // Push each tip into client-side array
+    var content = $('#tip-info').html();
+    var template = Handlebars.compile(content);
+    var html = template(tip);
+    var validHoursLength = tip.validHours.length - 1;
+    var hoursArr = tip.validHours;
+    Handlebars.registerHelper('each', function(tip, options){
+      var ret = "";
+      for (var i = 0, j = validHoursLength; i < j; i++){
+        ret = ret + options.fn(hoursArr[i]);
+      }
+      return ret;
+    });
     arrTips.push(tip);
-    // TODO: load html template
-    var content = 'Add Content';
     var infoWindow = new google.maps.InfoWindow({
-      content: content
+      content: html
     });
     var latLng = {lat: tip.coordinates.lat, lng: tip.coordinates.lng};
     var marker = new google.maps.Marker({
