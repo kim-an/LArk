@@ -132,8 +132,10 @@ function initMap() {
       validHoursEnd: $('#validHoursEndTimeField').val(),
       maxTime: $('#maxTimeField').val(),
       permit: $('input[name="permit"]:checked').val(),
-      costField: $('#costField').val(),
-      costExceptions: $('#costExceptionField').val()
+      cost: $('#costField').val(),
+      costExceptions: $('#costExceptionField').val(),
+      comments: $('#commentsField').val()
+      // TODO add flagged key
     }; // close newTip object
     console.log('this is from the client: ' + newTip);
     arrTips.push(newTip);

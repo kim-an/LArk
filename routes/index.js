@@ -40,8 +40,9 @@ router.post('/tips', isLoggedIn, function(req, res, next){
                 endTime: req.body.validHoursEnd},
     maxTime: req.body.maxTime,
     permit: req.body.permit,
-    costField: req.body.costField,
-    costExceptions: req.body.costExceptions
+    costField: req.body.cost,
+    costExceptions: req.body.costExceptions,
+    comments: req.body.comments
   },
     function (err, tip) {
       res.status(201).json(tip);

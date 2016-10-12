@@ -1,43 +1,61 @@
 <template id="google-maps-form">
-  <div class="form-field">
-    Parking type:
-    <select name="parkingType" id="parkingTypeField">
-      <option value="Street">Street</option>
-      <option value="Outdoor Lot">Outdoor Lot</option>
-      <option value="Indoor Lot">Indoor Lot</option>
-    </select>
+  <div class="container">
+    <div class="row">
+      <h5>Add Tip</h5>
+    </div>
+    <div class="row">
+      <div class="col-xs-2">
+        Parking type:
+      </div>
+      <div class="col-xs-3">
+        <select name="parkingType" id="parkingTypeField">
+          <option value="Street">Street</option>
+          <option value="Outdoor Lot">Outdoor Lot</option>
+          <option value="Indoor Lot">Indoor Lot</option>
+        </select>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-xs-2">
+      Valid hours:
+    </div>
+    <div class="col-xs-6">
+      <select name="validHours[day]" id="validHoursDayField">
+        <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
+          <option value="<%= day %>"><%= day %></option>
+        <% }) %>
+      </select>
+      From
+      <select name="validHours[startTime]" id="validHoursStartTimeField">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>">
+            <%= i > 12 ? i - 12 : i %>
+            <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+          </option>
+        <% }; %>
+      </select>
+      to
+      <select name="validHours[endTime]" id="validHoursEndTimeField">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>">
+            <%= i > 12 ? i - 12 : i %>
+            <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+          </option>
+        <% }; %>
+      </select>
+    </div>
   </div>
-  <div class="form-field">
-    Valid hours:
-    <select name="validHours[day]" id="validHoursDayField">
-      <% ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].forEach(function(day){ %>
-        <option value="<%= day %>"><%= day %></option>
-      <% }) %>
-    </select>
-    <select name="validHours[startTime]" id="validHoursStartTimeField">
-      <% for (var i = 1; i < 25; i++){ %>
-        <option value="<%= i %>">
-          <%= i > 12 ? i - 12 : i %>
-          <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
-        </option>
-      <% }; %>
-    </select>
-    <select name="validHours[endTime]" id="validHoursEndTimeField">
-      <% for (var i = 1; i < 25; i++){ %>
-        <option value="<%= i %>">
-          <%= i > 12 ? i - 12 : i %>
-          <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
-        </option>
-      <% }; %>
-    </select>
-  </div>
-  <div class="form-field">
-    Max Time:
-    <select name="maxTime" id="maxTimeField">
-      <% for (var i = 1; i < 25; i++){ %>
-        <option value="<%= i %>"><%= i %> <%= i < 2 ? 'hour':'hours' %></option>
-      <% }; %>
-    </select>
+  <div class="row">
+    <div class="col-xs-2">
+      Max Time:
+    </div>
+    <div class="col-xs-3">
+      <select name="maxTime" id="maxTimeField">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>"><%= i %> <%= i < 2 ? 'hour':'hours' %></option>
+        <% }; %>
+      </select>
+    </div>
   </div>
   <div class="form-field">
     <fieldset>
@@ -54,7 +72,12 @@
     Cost Exceptions:
      <input type="text" id="costExceptionField">
   </div>
+  <div class="form-field">
+    Comments:
+      <textarea cols="20" rows="5" id="commentsField"></textarea>
+  </div>
   <div class="submit-field">
     <button id="submit">Submit</button>
   </div>
+  </div> <!-- closes container div !-->
 </template>

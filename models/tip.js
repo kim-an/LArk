@@ -27,7 +27,7 @@ var tipSchema = new mongoose.Schema({
     {
       day: {
         type: String,
-        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        enum: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
       },
       // TODO: validate start and end time to 0000 - 2400 format
       startTime: String,
@@ -40,7 +40,8 @@ var tipSchema = new mongoose.Schema({
   },
   cost: String,
   costExceptions: String,
-  maxTime: String
+  maxTime: String,
+  flagged: Boolean
 });
 
 
