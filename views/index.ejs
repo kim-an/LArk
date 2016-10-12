@@ -1,4 +1,4 @@
-iiii9ii<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -52,11 +52,11 @@ iiii9ii<!DOCTYPE html>
               </div>
             </ul>
           </div> <!-- closes container -->
-            <button id="add-tip">Add Tip</button>
+            <button id="add-tip" class="btn btn-primary">+Add Tip</button>
             <div>
               <input id="address" type="text" name="street[address]">
-              &nbsp;
-              <button id="getAddress">Search</button>
+
+              <button id="getAddress" class="btn btn-primary">Search</button>
             </div>
             <ul class="left">
               <% if (user) { %>
@@ -133,7 +133,7 @@ iiii9ii<!DOCTYPE html>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap&libraries=places">
     </script>
     <script src="javascripts/app.js"></script>
   </body>
