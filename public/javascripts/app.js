@@ -28,12 +28,12 @@ function render(tips) {
     console.log(tip.validHours.length);
     Handlebars.registerHelper('each', function(tip, options){
       var ret = "";
-
       for (var i = 0, j = tip.validHours.length; i < j; i++){
         ret = ret + options.fn(tip.validHours[i]);
       }
       return ret;
     });
+    arrTips.push(tip);
     var infoWindow = new google.maps.InfoWindow({
       content: html
     });
