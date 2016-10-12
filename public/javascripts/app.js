@@ -25,11 +25,13 @@ function render(tips) {
     var content = $('#tip-info').html();
     var template = Handlebars.compile(content);
     var html = template(tip);
-    console.log(tip.validHours.length);
+    var validHoursLength = tip.validHours.length - 1;
+    var hoursArr = tip.validHours;
+    console.log(hoursArr);
     Handlebars.registerHelper('each', function(tip, options){
       var ret = "";
-      for (var i = 0, j = tip.validHours.length; i < j; i++){
-        ret = ret + options.fn(tip.validHours[i]);
+      for (var i = 0, j = validHoursLength; i < j; i++){
+        ret = ret + options.fn(hoursArr[i]);
       }
       return ret;
     });
@@ -203,12 +205,12 @@ function initMap() {
 
     // Sets a listener on a radio button to change the filter type on Places
     // Autocomplete.
-    function setupClickListener(id, types) {
-      var radioButton = document.getElementById(id);
-      radioButton.addEventListener('click', function() {
-        autocomplete.setTypes(types);
-      });
-    }
+    // function setupClickListener(id, types) {
+    //   var radioButton = document.getElementById(id);
+    //   radioButton.addEventListener('click', function() {
+    //     autocomplete.setTypes(types);
+    //   });
+    // }
 
     setupClickListener('changetype-all', []);
     setupClickListener('changetype-address', ['address']);
