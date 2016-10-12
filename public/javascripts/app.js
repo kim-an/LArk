@@ -86,6 +86,7 @@ function initMap() {
     //
     if(addTipToggle) {
       $.post('/', {lat: evt.latLng.lat(), lng: evt.latLng.lng()}, function(tip){
+        console.log(tip.coordinates);
         var form = $('#google-maps-form').html();
         var infoWindow = new google.maps.InfoWindow({
           content: form
@@ -98,9 +99,26 @@ function initMap() {
         // not necessary?
         // socket.emit('getTips');
         // socket.on('renderMarkers', render);
+        var lat = evt.latLng.lat();
+        var lng = evt.latLng.lng();
+        newTip = {
+          parkingType: $('#parkingTypeField').val(),
+          coordinates: {lat, lng},
+          validHours: [{ day: $('#validHoursDayField').val()}, {startTime: $('#validHoursStartTimeField').val()}, {endTime: $('#validHoursEndTimeField').val()}],
+          maxTime: $('#maxTimeField').val(),
+          permit: $('input[name="permit"]:checked').val(),
+          costField: $('#costField').val(),
+          costException: $('#costExceptionField').val()
+        };
       });
     }
   }); // close addListener
+
+// submit button action
+  $('#map').on('click', '#submit', function(evt){
+    console.log('clicked');
+  });
+
   // Geocoder
   var geocoder = new google.maps.Geocoder();
 
