@@ -22,9 +22,20 @@ navigator.geolocation.watchPosition(function(obj){
 
 function render(tips) {
   tips.forEach(function(tip) {
-    var content = 'Add Content';
+    var content = $('#tip-info').html();
+    var template = Handlebars.compile(content);
+    var html = template(tip);
+    console.log(tip.validHours.length);
+    Handlebars.registerHelper('each', function(tip, options){
+      var ret = "";
+
+      for (var i = 0, j = tip.validHours.length; i < j; i++){
+        ret = ret + options.fn(tip.validHours[i]);
+      }
+      return ret;
+    });
     var infoWindow = new google.maps.InfoWindow({
-      content: content
+      content: html
     });
     var latLng = {lat: tip.coordinates.lat, lng: tip.coordinates.lng};
     var marker = new google.maps.Marker({

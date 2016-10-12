@@ -1,0 +1,10 @@
+<template id="tip-info">
+  <div class="form-group">
+    <p>Parking Type: {{parkingType}}</p>
+    <p>Permit: {{permit}}</p>
+    <p>Valid hours: {{#each validHours}}{{day}}{{/each}}</p>
+    <p>Cost: {{cost}}</p>
+    <p>Comment: {{comment.message}}</p>
+
+  </div>
+</template>
