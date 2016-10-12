@@ -40,5 +40,9 @@ router.post('/', function(req, res, next){
   });
 });
 
+router.put('/', function(req, res, next){
+  // TODO grab tip by id
+});
+
 module.exports = router;
 

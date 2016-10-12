@@ -10,10 +10,10 @@ var tipSchema = new mongoose.Schema({
     enum: ['Street', 'Outdoor Lot', 'Indoor Lot']
   },
   coordinates: {
-    // {
-      lat: Number,
-      lng: Number
-    // }
+    // type: {
+    lat: Number,
+    lng: Number
+    // },
     // required: true
   },
   comment: {
