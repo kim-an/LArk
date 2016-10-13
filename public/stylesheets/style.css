@@ -97,3 +97,13 @@ li {
 #valid-hours {
   vertical-align: top;
 }
+
+#flag-button {
+  float: right;
+  border: 0;
+  background-color: white;
+}
+
+#flag-button:hover {
+  color: red;
+}
