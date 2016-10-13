@@ -128,9 +128,6 @@ function initMap() {
       coordinatesLat: clickLat,
       coordinatesLng: clickLng,
       validHours: getValidHours(),
-      // validHoursDay: $('#validHoursDayField').val(),
-      // validHoursStart: $('#validHoursStartTimeField').val(),
-      // validHoursEnd: $('#validHoursEndTimeField').val(),
       maxTime: $('#maxTimeField').val(),
       permit: $('input[name="permit"]:checked').val(),
       cost: $('#costField').val(),
@@ -169,6 +166,7 @@ function initMap() {
       };
     });
   }
+
 
   window.getValid = getValidHours;
 

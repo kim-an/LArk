@@ -25,11 +25,7 @@ var tipSchema = new mongoose.Schema({
   },
   validHours: [
     {
-      day: {
-        type: String,
-        enum: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-      },
-      // TODO: validate start and end time to 0000 - 2400 format
+      day: String,
       startTime: String,
       endTime: String
     }

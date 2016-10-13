@@ -35,9 +35,7 @@ router.post('/tips', isLoggedIn, function(req, res, next){
   Tip.create({
     parkingType: req.body.parkingType,
     coordinates: {lat: req.body.coordinatesLat, lng: req.body.coordinatesLng},
-    validHours: {day: req.body.validHoursDay,
-                startTime: req.body.validHoursStart,
-                endTime: req.body.validHoursEnd},
+    validHours: req.body.validHours,
     maxTime: req.body.maxTime,
     permit: req.body.permit,
     costField: req.body.cost,
