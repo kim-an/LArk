@@ -174,6 +174,7 @@ $map.on('click', '#edit-tip', function(e) {
 // Put to update tip
 $map.on('click', '.submit-edit', function(e) {
   console.log("submit edit clicked!");
+  var tipId = '';
   var editedTip = {
     parkingType: $('#parking-type-edit').val(),
     maxTime: $('#max-time-edit').val(),
@@ -182,7 +183,7 @@ $map.on('click', '.submit-edit', function(e) {
     comment: $('#comment-edit').val()
   }
   $.ajax({
-    url: `/tips/${tipId}`,
+    url: `/tip`,
     method: 'PUT',
     data: editedTip
   }).done(function(response){

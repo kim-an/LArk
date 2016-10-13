@@ -128,6 +128,12 @@ li {
   color: red;
 }
 
+#flag-button[disabled]{
+  color: red;
+}
+
 .table>thead>tr>td {
     border-bottom: 2px solid #ddd;
 }
+
+
