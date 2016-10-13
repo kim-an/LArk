@@ -193,6 +193,8 @@ function initMap() {
   // add edit tip
   editTip();
 
+  deleteTip();
+
 // listener for flag
 $map.on('click', '#flag-button', function(evt){
   console.log('flag clicked!');
@@ -360,6 +362,20 @@ function editTip(){
   })
 }
 
+function deleteTip() {
+  $map.on('click', '#delete-tip', function(e) {
+    console.log('delete clicked!');
+    tipId = $('#comment').attr('data-id');
+    $.ajax({
+      url:'/tip',
+      method: "DELETE",
+      data: {tipId: tipId}
+    }).done(function(response){
+      console.log(response);
+      console.log(infoWindow);
+    });
+  });
+}
 
 $addTip.on('click', function(){
   addTipToggle = true;
