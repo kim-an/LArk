@@ -193,6 +193,8 @@ function initMap() {
   // add edit tip
   editTip();
 
+  deleteTip();
+
 // listener for flag
 $map.on('click', '#flag-button', function(evt){
   console.log('flag clicked!');
@@ -361,8 +363,8 @@ function editTip(){
 }
 
 function deleteTip() {
-  $map.on('click', '#delete-tip', function(evt){
-    console.log("delete button clicked");
+  $map.on('click', '#delete-tip', function(e) {
+    console.log('delete clicked!');
   });
 }
 
