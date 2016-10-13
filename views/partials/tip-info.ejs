@@ -1,9 +1,9 @@
 <template id="tip-info">
-  <table class="table">
+  <table class="table display-info">
     <thead>
       <tr>
         <th>Parking Type</th>
-        <td> {{parkingType}}
+        <td id="parking-type"> {{parkingType}}
         <!-- check with Jim -- how do I get user id out of sockets !-->
         <% if (user) { %>
          <span class="glyphicon glyphicon-flag" aria-hidden="true" id="flag-button" data-id="{{_id}}"></span></td>
@@ -11,19 +11,19 @@
       </tr>
       <tr>
         <th id="valid-hours">Valid Hours</th>
-        <td>{{#each validHours}}{{day}}: {{startTime}} to {{endTime}}<br>{{/each}}</p></td>
+        <td id="valid-hours-input">{{#each validHours}}{{day}}: {{startTime}} to {{endTime}}<br>{{/each}}</p></td>
       </tr>
       <tr>
         <th>Cost</th>
-        <td> {{cost}} </td>
+        <td id="cost"> {{cost}} </td>
       </tr>
       <tr>
         <th>Maximum Time</th>
-        <td>{{maxTime}}</td>
+        <td id="max-time">{{maxTime}}</td>
       </tr>
       <tr>
         <th>Permit</th>
-        <td>
+        <td id="permit">
           {{#if permit}}
             Required
           {{else}}
@@ -33,13 +33,13 @@
       </tr>
       <tr>
         <th>Comment</th>
-        <td>{{comment.message}}</td>
+        <td id="comment">{{comment}}</td>
       </tr>
     </thead>
   </table>
   <% if (user) { %>
     <div class="form-inline">
-      <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+      <button id="edit-tip" type="submit" class="btn btn-warning btn-sm">Edit</button>
       <button type="submit" class="btn btn-danger btn-sm">Delete</button>
     </div>
   <% } %>

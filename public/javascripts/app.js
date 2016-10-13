@@ -6,8 +6,25 @@ var addTipToggle = false;
 
 var $addTip = $('#add-tip');
 var $plus = $('#plus');
+var $map = $('#map');
 
 var arrTips = [];
+
+//TODO have option to clear this
+navigator.geolocation.watchPosition(function(obj){
+  myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
+  console.log(myLocation);
+  if (map){
+    map.panTo(myLocation);
+  } else {
+    console.log('map doesnt exist yet');
+  }
+});
+
+// run through each tip and see
+function runThroughTips(tip){
+  tip.flaggerId.findIndex()
+}
 
 function render(tips) {
   tips.forEach(function(tip) {
@@ -108,32 +125,53 @@ function initMap() {
       });
 
       infoWindow.open(map, marker);
-        // not necessary?
+
 // submit button action
-  $('#map').on('click', '#submit', function(evt){
-    newTip = {
-      parkingType: $('#parkingTypeField').val(),
-      coordinatesLat: clickLat,
-      coordinatesLng: clickLng,
-      validHours: getValidHours(),
-      maxTime: $('#maxTimeField').val(),
-      permit: $('input[name="permit"]:checked').val(),
-      cost: $('#costField').val(),
-      costExceptions: $('#costExceptionField').val(),
-      comment: $('#commentsField').val()
-    }; // close newTip object
-    console.log('this is from the client: ' + newTip);
-    arrTips.push(newTip);
-    $.post('/tips', newTip, function(tip){
-      console.log(tip);
-      infoWindow.close();
-    }); // close post
-  } );
+      $map.on('click', '#submit', function(evt){
+        newTip = {
+          parkingType: $('#parkingTypeField').val(),
+          coordinatesLat: clickLat,
+          coordinatesLng: clickLng,
+          validHours: getValidHours(),
+          maxTime: $('#maxTimeField').val(),
+          permit: $('input[name="permit"]:checked').val(),
+          cost: $('#costField').val(),
+          costExceptions: $('#costExceptionField').val(),
+          comment: $('#commentsField').val()
+        }; // close newTip object
+        console.log('this is from the client: ' + newTip);
+        arrTips.push(newTip);
+        $.post('/tips', newTip, function(tip){
+          console.log(tip);
+          infoWindow.close();
+        }); // close post
+      });
     } // close addTipToggle
   }); // close addListener
 
+  // edit-tip
+$map.on('click', '#edit-tip', function(e) {
+  console.log('clicked');
+  // replace display info elements with corresponding input
+  $('#parking-type').html("<select name='parkingType' id='parking-type-edit'><option value='Street'>Street</option><option value='Outdoor Lot'>Outdoor Lot</option><option value='Indoor Lot'>Indoor Lot</option></select>");
+  // TODO Need to replace valid hours with new input
+  // var validHoursHTML = '';
+  // $('#valid-hours-input').html()
+  $('#cost').html("$<input type='text' id='cost-edit'>/hr");
+  var maxTimeHTML = '';
+  for (var i = 1; i < 25; i++) {
+    maxTimeHTML += `<option value=${i}>${i}</option>`
+  }
+  $('#max-time').html(`<select name='maxTime' id='max-time-edit'>${maxTimeHTML}</select>`);
+  var permitHTML = '<label for="required"><input type="radio" name="permit" value=true checked>Required</label><label for="not-required"><input type="radio" name="permit" value=false>Not required</label>';
+  $('#permit').html(`<fieldset>${permitHTML}</fieldset>`)
+  $('#comment').html(`<textarea cols="20" rows="3" id="comment-edit"></textarea>`)
+  $('#edit-tip').text('Submit');
+  $('#edit-tip').addClass('submit-edit');
+});
+
 // listener for flag
-$('#map').on('click', '#flag-button', function(evt){
+$map.on('click', '#flag-button', function(evt){
   console.log('flag clicked!');
   var tipId = $('#flag-button').attr('data-id');
   // socket.emit('flagTip', tipId);
@@ -148,7 +186,7 @@ $('#map').on('click', '#flag-button', function(evt){
 });
 
   // plus button on form
-  $('#map').on('click', '#clickPlus', function(evt){
+  $map.on('click', '#clickPlus', function(evt){
     $('#appendThis').append($('#addRow').html());
   });
 
