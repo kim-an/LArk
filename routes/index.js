@@ -32,7 +32,9 @@ router.get('/logout', function(req, res) {
 
 // create new tip based on click event
 router.post('/tips', isLoggedIn, function(req, res, next){
+  console.log(req.user);
   Tip.create({
+    userID: req.user._id,
     parkingType: req.body.parkingType,
     coordinates: {lat: req.body.coordinatesLat, lng: req.body.coordinatesLng},
     validHours: req.body.validHours,
