@@ -26,13 +26,7 @@ var tipSchema = new mongoose.Schema({
     // },
     // required: true
   },
-  comment: {
-    message: String,
-    createdAt: {
-      type: Date,
-      default: Date.now
-    }
-  },
+  comment: String,
   validHours: [
     {
       day: String,

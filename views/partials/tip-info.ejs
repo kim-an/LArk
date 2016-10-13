@@ -4,7 +4,6 @@
       <tr>
         <th>Parking Type</th>
         <td> {{parkingType}}
-        <!-- check with Jim -- how do I get user id out of sockets !-->
         <% if (user) { %>
           <button id="flag-button" data-id="{{_id}}"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></button>
         <% } %>
@@ -24,7 +23,13 @@
       </tr>
       <tr>
         <th>Permit</th>
-        <td>{{permit}}</td>
+        <td>
+          {{#if permit}}
+            Required
+          {{else}}
+            Not Required
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <th>Comment</th>
@@ -35,6 +40,7 @@
   <% if (user) { %>
     <div class="form-inline">
       <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
     </div>
   <% } %>
 </template>

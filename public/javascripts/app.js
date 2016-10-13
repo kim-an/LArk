@@ -9,18 +9,6 @@ var $plus = $('#plus');
 
 var arrTips = [];
 
-//TODO have option to clear this
-navigator.geolocation.watchPosition(function(obj){
-  myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
-  if (map){
-    map.panTo(myLocation);
-  } else {
-  }
-});
-
-// run through each tip and see if current user id matches one of the ids in flagger array
-
-
 function render(tips) {
   tips.forEach(function(tip) {
     var content = $('#tip-info').html();
@@ -134,7 +122,7 @@ function initMap() {
       permit: $('input[name="permit"]:checked').val(),
       cost: $('#costField').val(),
       costExceptions: $('#costExceptionField').val(),
-      comments: $('#commentsField').val()
+      comment: $('#commentsField').val()
     }; // close newTip object
     arrTips.push(newTip);
     $.post('/tips', newTip, function(tip){
@@ -151,13 +139,15 @@ $('#map').on('click', '#flag-button', function(evt){
   if ($('#flag-button').prop('disabled')){
     return false;
   }
+  console.log('clicked flag');
   var tipId = $('#flag-button').attr('data-id');
   $.ajax({
     url: `/tips/${tipId}`,
     method: 'PUT',
     data: {tipId: tipId}
   }).done(function(response){
-    $('#flag-button').css('color', 'red').prop('disabled', 'true');
+    $('#flag-button').prop('disabled', 'true');
+    console.log('returned from database');
   });
 });
 

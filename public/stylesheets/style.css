@@ -20,9 +20,9 @@ body {
 }
 
 
-ul {
+/*ul {
   text-align: center;
-}
+}*/
 
 a {
   color: white;
@@ -33,12 +33,19 @@ a:hover {
   text-decoration: none;
 }
 
+#googleBtn {
+  background-color: #DD4B39;
+  position: relative;
+  left: 70vw;
+}
+
 #log-in {
-  padding-left: 1005px;
+  button-color: #DD4B39;
 }
 
 #log-out {
-  padding-left: 1005px;
+  position: relative;
+  left: 75vw;
 }
 
 #about-us {
@@ -78,7 +85,8 @@ a:hover {
 
 #map {
   height: 90vh;
-  width: 100vw;
+  width: 95vw;
+  margin: 0 auto;
 }
 
 #top-bar {
@@ -119,3 +127,13 @@ li {
 #flag-button:hover {
   color: red;
 }
+
+#flag-button[disabled]{
+  color: red;
+}
+
+.table>thead>tr>td {
+    border-bottom: 2px solid #ddd;
+}
+
+
