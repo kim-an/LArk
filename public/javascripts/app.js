@@ -30,7 +30,8 @@ function render(tips) {
     var latLng = {lat: tip.coordinates.lat, lng: tip.coordinates.lng};
     var marker = new google.maps.Marker({
       position: latLng,
-      map: map
+      map: map,
+      icon: '../images/LArk_pin_01.png'
     });
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
@@ -102,7 +103,8 @@ function initMap() {
 
       var marker = new google.maps.Marker({
         position: {lat: clickLat, lng: clickLng},
-        map: map
+        map: map,
+        icon: '../images/LArk_pin_01.png'
       });
 
       infoWindow.open(map, marker);
