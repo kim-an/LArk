@@ -76,6 +76,14 @@ router.put('/tip', function(req, res, next){
   })
 })
 
+router.delete('/tip', function(req, res, next){
+  Tip.findByIdAndRemove(req.body.tipId, function(err, tip){
+    if (err) next(err);
+    console.log(`this tip was removed: ${tip}`);
+    res.status(200).json(tip);
+  })
+})
+
 module.exports = router;
 
 // check to see if user is logged in

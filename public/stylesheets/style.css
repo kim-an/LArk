@@ -41,7 +41,7 @@ a:hover {
 #googleBtn {
   background-color: #DD4B39;
   position: relative;
-  left: 70vw;
+  left: 53vw;
 }
 
 #log-in {
@@ -50,7 +50,7 @@ a:hover {
 
 #log-out {
   position: relative;
-  left: 75vw;
+  left: 60vw;
 }
 
 #about-us {
@@ -60,7 +60,7 @@ a:hover {
 #tip-button {
   position: absolute;
   top: 10px;
-  left: 95vw;
+  left: 92vw;
   z-index: 99;
 }
 
@@ -138,7 +138,11 @@ li {
 }
 
 .table>thead>tr>td {
-    border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+}
+
+#center-map-control {
+  width: 2.5vw;
 }
 
 

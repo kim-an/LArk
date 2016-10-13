@@ -1,15 +1,5 @@
-<nav class="navbar navbar-default">
-  <div id="top-bar" class="container-fluid">
-  <div class="navbar-header">
-  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-    <% include ../welcome %>
   </div>
-
+    <% include ../welcome %>
     <div id="about-us" class="collapse navbar-collapse">
       <ul class="list-unstyled nav navbar-nav">
         <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#myModal">ABOUT US</a></li>
@@ -53,6 +43,18 @@
           </div>
         </ul>
       </div> <!-- closes container -->
+    <div id="instructions">
+      <ul>
+        <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#instructionModal">INSTRUCTIONS</a></li>
+        <% include ./instructions %>
+      </ul>
+    </div>
+    <div id="about-us">
+      <ul class="list-unstyled">
+        <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#aboutUsModal">ABOUT US</a></li>
+        <% include ./about-us %>
+      </ul>
+    </div> <!-- closes container -->
         <!-- check to see if user is logged in or out -->
         <div>
             <% if (user) { %>

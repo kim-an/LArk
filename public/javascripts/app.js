@@ -79,7 +79,7 @@ function CenterControl(controlDiv, map) {
         controlText.style.lineHeight = '38px';
         controlText.style.paddingLeft = '5px';
         controlText.style.paddingRight = '5px';
-        controlText.innerHTML = 'Center Map';
+        controlText.innerHTML = '<img id="center-map-control" src="../images/center-map.png">';
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners.
@@ -133,7 +133,7 @@ function initMap() {
     var centerControl = new CenterControl(centerControlDiv, map);
 
     centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 
 
   // associating the styled map w/existing map
@@ -192,6 +192,8 @@ function initMap() {
 
   // add edit tip
   editTip();
+
+  deleteTip();
 
 // listener for flag
 $map.on('click', '#flag-button', function(evt){
@@ -360,6 +362,20 @@ function editTip(){
   })
 }
 
+function deleteTip() {
+  $map.on('click', '#delete-tip', function(e) {
+    console.log('delete clicked!');
+    tipId = $('#comment').attr('data-id');
+    $.ajax({
+      url:'/tip',
+      method: "DELETE",
+      data: {tipId: tipId}
+    }).done(function(response){
+      console.log(response);
+      console.log(infoWindow);
+    });
+  });
+}
 
 $addTip.on('click', function(){
   addTipToggle = true;
