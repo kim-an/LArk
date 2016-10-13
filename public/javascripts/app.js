@@ -9,6 +9,9 @@ var $plus = $('#plus');
 
 var arrTips = [];
 
+
+function initMap() {
+  // styled map
 function render(tips) {
   tips.forEach(function(tip) {
     var content = $('#tip-info').html();
@@ -36,14 +39,12 @@ function render(tips) {
       infoWindow.open(map, marker);
     });
     console.log(tip.flaggerIds, currentUserId);
-    if (!tip.flaggerIds.includes(currentUserId)){
+    if (tip.flaggerIds.includes(currentUserId)){
+      console.log('this one includes the id');
       $('#flag-button').prop('disabled', true);
     }
   });
 }
-
-function initMap() {
-  // styled map
   var styledMapType = new google.maps.StyledMapType([
     {
       "featureType": "all",
@@ -132,12 +133,10 @@ function initMap() {
     } // close addTipToggle
   }); // close addListener
 
-
-
 // listener for flag
 $('#map').on('click', '#flag-button', function(evt){
   if ($('#flag-button').prop('disabled')){
-    return false;
+    return;
   }
   console.log('clicked flag');
   var tipId = $('#flag-button').attr('data-id');
@@ -150,6 +149,8 @@ $('#map').on('click', '#flag-button', function(evt){
     console.log('returned from database');
   });
 });
+
+
 
   // plus button on form
   $('#map').on('click', '#clickPlus', function(evt){
