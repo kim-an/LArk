@@ -364,7 +364,7 @@ function deleteTip() {
   $map.on('click', '#delete-tip', function(evt){
     console.log('delete button clicked');
   });
-};
+}
 
 $addTip.on('click', function(){
   addTipToggle = true;
