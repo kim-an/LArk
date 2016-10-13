@@ -12,8 +12,8 @@ var validHoursSchema = new mongoose.Schema({
 
 var tipSchema = new mongoose.Schema({
   userID: {
-    type: mongoose.Schema.Types.ObjectId
-    // required: true
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
   },
   parkingType: {
     type: String,
@@ -47,7 +47,8 @@ var tipSchema = new mongoose.Schema({
   cost: String,
   costExceptions: String,
   maxTime: String,
-  flagged: Number
+  flagged: Number,
+  flaggerId: [String]
 });
 
 

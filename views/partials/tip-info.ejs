@@ -3,7 +3,11 @@
     <thead>
       <tr>
         <th>Parking Type</th>
-        <td> {{parkingType}} </td>
+        <td> {{parkingType}}
+        <!-- check with Jim -- how do I get user id out of sockets !-->
+        <% if (user) { %>
+         <span class="glyphicon glyphicon-flag" aria-hidden="true" id="flag-button" data-id="{{_id}}"></span></td>
+        <% } %>
       </tr>
       <tr>
         <th id="valid-hours">Valid Hours</th>

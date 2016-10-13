@@ -32,7 +32,6 @@ router.get('/logout', function(req, res) {
 
 // create new tip based on click event
 router.post('/tips', isLoggedIn, function(req, res, next){
-  console.log(req.user);
   Tip.create({
     userID: req.user._id,
     parkingType: req.body.parkingType,
@@ -50,8 +49,13 @@ router.post('/tips', isLoggedIn, function(req, res, next){
   );
 });
 
-router.put('/', function(req, res, next){
-  // TODO grab tip by id
+// these 3 lines took me 20 minutes. change this and I'll cut you :D
+router.put('/tips/:id', function(req, res, next){
+  Tip.findByIdAndUpdate(req.body.tipId, { $inc: { flagged: 1}}, function (err, tip){
+    tip.flaggerId.push(req.user._id);
+    console.log('updated!');
+    res.status(201).json(tip);
+  });
 });
 
 module.exports = router;
