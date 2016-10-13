@@ -125,3 +125,7 @@ li {
 #flag-button:hover {
   color: red;
 }
+
+.table>thead>tr>td {
+    border-bottom: 2px solid #ddd;
+}

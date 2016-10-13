@@ -23,17 +23,24 @@
       </tr>
       <tr>
         <th>Permit</th>
-        <td>{{permit}}</td>
+        <td>
+          {{#if permit}}
+            Required
+          {{else}}
+            Not Required
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <th>Comment</th>
-        <td>{{comment}}</td>
+        <td>{{comment.message}}</td>
       </tr>
     </thead>
   </table>
   <% if (user) { %>
     <div class="form-inline">
       <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
     </div>
   <% } %>
 </template>
