@@ -52,6 +52,7 @@ router.post('/tips', isLoggedIn, function(req, res, next){
 // these 3 lines took me 20 minutes. change this and I'll cut you :D
 router.put('/tips/:id', function(req, res, next){
   Tip.findByIdAndUpdate(req.body.tipId, { $inc: { flagged: 1}}, function (err, tip){
+    if (err) next(err);
     tip.flaggerIds.push(req.user._id);
     console.log('updated!');
     res.status(201).json(tip);
