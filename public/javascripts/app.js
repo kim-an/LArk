@@ -165,7 +165,9 @@ $map.on('click', '#edit-tip', function(e) {
   $('#max-time').html(`<select name='maxTime' id='max-time-edit'>${maxTimeHTML}</select>`);
   var permitHTML = '<label for="required"><input type="radio" name="permit" value=true checked>Required</label><label for="not-required"><input type="radio" name="permit" value=false>Not required</label>';
   $('#permit').html(`<fieldset>${permitHTML}</fieldset>`)
-  $('#comment').html(`<textarea cols="20" rows="5" id="comment-edit"></textarea>`)
+  $('#comment').html(`<textarea cols="20" rows="3" id="comment-edit"></textarea>`)
+  $('#edit-tip').text('Submit');
+  $('#edit-tip').addClass('submit-edit');
 });
 
 // listener for flag
