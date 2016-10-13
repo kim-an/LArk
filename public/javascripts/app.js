@@ -51,7 +51,12 @@ function render(tips) {
       icon: '../images/LArk_pin_01.png'
     });
     marker.addListener('click', function(){
+      if(infoWindow) {
+        infoWindow.close();
+      }
       infoWindow.open(map, marker);
+      editTip(infoWindow);
+      deleteTip(infoWindow);
     });
   });
 }
@@ -155,7 +160,7 @@ function initMap() {
       clickLng = evt.latLng.lng();
 
       var form = $('#google-maps-form').html();
-      var infoWindow = new google.maps.InfoWindow({
+      infoWindow = new google.maps.InfoWindow({
         content: form
       });
 
@@ -166,7 +171,6 @@ function initMap() {
       });
 
       infoWindow.open(map, marker);
-
 // submit button action
       $map.on('click', '#submit', function(evt){
         newTip = {
@@ -190,10 +194,6 @@ function initMap() {
     } // close addTipToggle
   }); // close addListener
 
-  // add edit tip
-  editTip();
-
-  deleteTip();
 
 // listener for flag
 $map.on('click', '#flag-button', function(evt){
@@ -318,7 +318,7 @@ function geocodeAddress(geocoder, resultsMap) {
   });
 }
 
-function editTip(){
+function editTip(infowindow){
     // edit-tip
   $map.on('click', '#edit-tip', function(e) {
     console.log('edit clicked');
@@ -358,11 +358,12 @@ function editTip(){
       data: editedTip
     }).done(function(response){
       console.log(response);
+      infowindow.close();
     });
   })
 }
 
-function deleteTip() {
+function deleteTip(infowindow) {
   $map.on('click', '#delete-tip', function(e) {
     console.log('delete clicked!');
     tipId = $('#comment').attr('data-id');
@@ -372,7 +373,7 @@ function deleteTip() {
       data: {tipId: tipId}
     }).done(function(response){
       console.log(response);
-      console.log(infoWindow);
+      infowindow.close();
     });
   });
 }
