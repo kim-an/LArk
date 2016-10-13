@@ -1,12 +1,36 @@
 <template id="tip-info">
-  <div class="form-group">
-    <p>Parking Type: {{parkingType}}</p>
-    <p>Valid Hours:<br>
-    {{#each validHours}}{{day}}: {{startTime}} to {{endTime}}<br>{{/each}}</p>
-    <p>Cost: {{cost}}</p>
-    <p>Maximum Time: {{maxTime}} </p>
-    <p>Permit: {{permit}} </p>
-    <p>Comment: {{comment.message}}</p>
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Parking Type</th>
+        <td> {{parkingType}} </td>
+      </tr>
+      <tr>
+        <th id="valid-hours">Valid Hours</th>
+        <td>{{#each validHours}}{{day}}: {{startTime}} to {{endTime}}<br>{{/each}}</p></td>
+      </tr>
+      <tr>
+        <th>Cost</th>
+        <td> {{cost}} </td>
+      </tr>
+      <tr>
+        <th>Maximum Time</th>
+        <td>{{maxTime}}</td>
+      </tr>
+      <tr>
+        <th>Permit</th>
+        <td>{{permit}}</td>
+      </tr>
+      <tr>
+        <th>Comment</th>
+        <td>{{comment.message}}</td>
+      </tr>
+    </thead>
+  </table>
+  <% if (user) { %>
+    <div class="form-inline">
+      <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+    </div>
+  <% } %>
 </template>
 
