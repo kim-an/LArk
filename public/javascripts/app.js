@@ -10,7 +10,6 @@ var $map = $('#map');
 
 var arrTips = [];
 
-
 //TODO have option to clear this
 navigator.geolocation.watchPosition(function(obj){
   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
@@ -26,7 +25,6 @@ navigator.geolocation.watchPosition(function(obj){
 function runThroughTips(tip){
   tip.flaggerId.findIndex()
 }
-
 
 function render(tips) {
   tips.forEach(function(tip) {
@@ -49,7 +47,8 @@ function render(tips) {
     var latLng = {lat: tip.coordinates.lat, lng: tip.coordinates.lng};
     var marker = new google.maps.Marker({
       position: latLng,
-      map: map
+      map: map,
+      icon: '../images/LArk_pin_01.png'
     });
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
@@ -121,7 +120,8 @@ function initMap() {
 
       var marker = new google.maps.Marker({
         position: {lat: clickLat, lng: clickLng},
-        map: map
+        map: map,
+        icon: '../images/LArk_pin_01.png'
       });
 
       infoWindow.open(map, marker);
