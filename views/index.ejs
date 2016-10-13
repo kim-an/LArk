@@ -29,6 +29,12 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap&libraries=places">
     </script>
+    <script>
+        var currentUserId;
+        <% if (user) { %>
+            currentUserId = '<%= user._id %>'
+        <% } %>
+    </script>
     <script src="javascripts/app.js"></script>
   </body>
 </html>

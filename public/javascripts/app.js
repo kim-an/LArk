@@ -20,10 +20,7 @@ navigator.geolocation.watchPosition(function(obj){
   }
 });
 
-// run through each tip and see
-function runThroughTips(tip){
-  tip.flaggerId.findIndex()
-}
+// run through each tip and see if current user id matches one of the ids in flagger array
 
 
 function render(tips) {
@@ -52,6 +49,9 @@ function render(tips) {
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
     });
+    if (!tip.flaggerIds.includes(currentUserId)){
+      $('#flag-button').prop('disabled', true);
+    }
   });
 }
 
@@ -151,7 +151,6 @@ function initMap() {
 $('#map').on('click', '#flag-button', function(evt){
   console.log('flag clicked!');
   var tipId = $('#flag-button').attr('data-id');
-  // socket.emit('flagTip', tipId);
   $.ajax({
     url: `/tips/${tipId}`,
     method: 'PUT',
