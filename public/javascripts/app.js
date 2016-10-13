@@ -37,14 +37,14 @@ function render(tips) {
     });
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
+      if (tip.flaggerIds.includes(currentUserId)){
+        $('#table-head').prepend($('#flagged-tip').html());
+        $('#flag-button').remove();
+      }
     });
-    console.log(tip.flaggerIds, currentUserId, tip.flaggerIds.includes(currentUserId));
-    if (tip.flaggerIds.includes(currentUserId)){
-      console.log('this includes method executed');
-      $('#flag-button').prop('disabled', true);
-    }
   });
 }
+
   var styledMapType = new google.maps.StyledMapType([
     {
       "featureType": "all",
@@ -151,6 +151,19 @@ $('#map').on('click', '#flag-button', function(evt){
   });
 });
 
+
+// abandon this for now
+// $('#map').on('click', '#flag-button', function(evt){
+//   // if tip
+//   // flagbutton attr data-id has the tip id
+//   // can go to server to get the tip
+//   // return the tip object
+//   //
+// })
+// if (tip.flaggerIds.includes(currentUserId)){
+//   console.log('this includes method executed');
+//   $('#flag-button').prop('disabled', true);
+// }
 
 
   // plus button on form
