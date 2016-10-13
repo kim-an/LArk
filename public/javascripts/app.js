@@ -372,6 +372,7 @@ function deleteTip() {
       data: {tipId: tipId}
     }).done(function(response){
       console.log(response);
+      console.log(infoWindow);
     });
   });
 }
