@@ -149,26 +149,8 @@ function initMap() {
     } // close addTipToggle
   }); // close addListener
 
-  // edit-tip
-$map.on('click', '#edit-tip', function(e) {
-  console.log('clicked');
-  // replace display info elements with corresponding input
-  $('#parking-type').html("<select name='parkingType' id='parking-type-edit'><option value='Street'>Street</option><option value='Outdoor Lot'>Outdoor Lot</option><option value='Indoor Lot'>Indoor Lot</option></select>");
-  // TODO Need to replace valid hours with new input
-  // var validHoursHTML = '';
-  // $('#valid-hours-input').html()
-  $('#cost').html("$<input type='text' id='cost-edit'>/hr");
-  var maxTimeHTML = '';
-  for (var i = 1; i < 25; i++) {
-    maxTimeHTML += `<option value=${i}>${i}</option>`
-  }
-  $('#max-time').html(`<select name='maxTime' id='max-time-edit'>${maxTimeHTML}</select>`);
-  var permitHTML = '<label for="required"><input type="radio" name="permit" value=true checked>Required</label><label for="not-required"><input type="radio" name="permit" value=false>Not required</label>';
-  $('#permit').html(`<fieldset>${permitHTML}</fieldset>`)
-  $('#comment').html(`<textarea cols="20" rows="3" id="comment-edit"></textarea>`)
-  $('#edit-tip').text('Submit');
-  $('#edit-tip').addClass('submit-edit');
-});
+  // add edit tip
+  editTip();
 
 // listener for flag
 $map.on('click', '#flag-button', function(evt){
@@ -291,6 +273,50 @@ function geocodeAddress(geocoder, resultsMap) {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
+}
+
+function editTip(){
+    // edit-tip
+  $map.on('click', '#edit-tip', function(e) {
+    console.log('edit clicked');
+    // replace display info elements with corresponding input
+    $('#parking-type').html("<select name='parkingType' id='parking-type-edit'><option value='Street'>Street</option><option value='Outdoor Lot'>Outdoor Lot</option><option value='Indoor Lot'>Indoor Lot</option></select>");
+    // TODO Need to replace valid hours with new input
+    // var validHoursHTML = '';
+    // $('#valid-hours-input').html()
+    $('#cost').html("$<input type='text' id='cost-edit'>/hr");
+    var maxTimeHTML = '';
+    for (var i = 1; i < 25; i++) {
+      maxTimeHTML += `<option value=${i}>${i}</option>`
+    }
+    $('#max-time').html(`<select name='maxTime' id='max-time-edit'>${maxTimeHTML}</select>`);
+    var permitHTML = '<label for="required"><input type="radio" name="permit" value=true checked>Required</label><label for="not-required"><input type="radio" name="permit" value=false>Not required</label>';
+    $('#permit').html(`<fieldset>${permitHTML}</fieldset>`)
+    $('#comment').html(`<textarea cols="20" rows="3" id="comment-edit"></textarea>`)
+    $('#edit-tip').text('Submit');
+    $('#edit-tip').addClass('submit-edit');
+    $('#edit-tip').removeAttr('id');
+  });
+
+  // Put to update tip
+  $map.on('click', '.submit-edit', function(e) {
+    console.log("submit edit clicked!");
+    var editedTip = {
+      tipId: $('#comment').attr('data-id'),
+      parkingType: $('#parking-type-edit').val(),
+      maxTime: $('#max-time-edit').val(),
+      permit: $('input[name="permit"]:checked').val(),
+      cost: $('#cost-edit').val(),
+      comment: $('#comment-edit').val()
+    }
+    $.ajax({
+      url: `/tip`,
+      method: 'PUT',
+      data: editedTip
+    }).done(function(response){
+      console.log(response);
+    });
+  })
 }
 
 

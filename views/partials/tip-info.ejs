@@ -4,10 +4,10 @@
       <tr>
         <th>Parking Type</th>
         <td id="parking-type"> {{parkingType}}
-        <!-- check with Jim -- how do I get user id out of sockets !-->
         <% if (user) { %>
-         <span class="glyphicon glyphicon-flag" aria-hidden="true" id="flag-button" data-id="{{_id}}"></span></td>
+          <button id="flag-button" data-id="{{_id}}"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></button>
         <% } %>
+        </td>
       </tr>
       <tr>
         <th id="valid-hours">Valid Hours</th>
@@ -33,7 +33,7 @@
       </tr>
       <tr>
         <th>Comment</th>
-        <td id="comment">{{comment}}</td>
+        <td id="comment" data-id="{{_id}}">{{comment}}</td>
       </tr>
     </thead>
   </table>

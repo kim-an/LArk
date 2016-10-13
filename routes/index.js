@@ -52,11 +52,29 @@ router.post('/tips', isLoggedIn, function(req, res, next){
 // these 3 lines took me 20 minutes. change this and I'll cut you :D
 router.put('/tips/:id', function(req, res, next){
   Tip.findByIdAndUpdate(req.body.tipId, { $inc: { flagged: 1}}, function (err, tip){
-    tip.flaggerId.push(req.user._id);
-    console.log('updated!');
-    res.status(201).json(tip);
+    if (err) next(err);
+    tip.flaggerIds.push(req.user._id);
+    tip.save(function(err){
+      console.log('updated!');
+      res.status(200).json(tip);
+    });
   });
 });
+
+router.put('/tip', function(req, res, next){
+  Tip.findById(req.body.tipId, function(err, tip){
+    if (err) next(err);
+    tip.parkingType = req.body.parkingType;
+    tip.maxTime = req.body.maxTime;
+    tip.permit = req.body.permit;
+    tip.cost = req.body.cost;
+    tip.comment = req.body.comment;
+    tip.save(function(err){
+      console.log("tip updated");
+      res.status(200).json(tip);
+    })
+  })
+})
 
 module.exports = router;
 

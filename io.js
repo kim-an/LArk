@@ -10,10 +10,6 @@ io.on('connection', function (socket){
       socket.emit('renderMarkers', tips);
     });
   });
-  socket.on('flagTip', function(tipId){
-    Tip.findByIdAndUpdate(tipId, { $inc: { flagged: 1}}, function (err, tip){
-    });
-  });
 });
 
 module.exports = io;

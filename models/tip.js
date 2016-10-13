@@ -42,7 +42,7 @@ var tipSchema = new mongoose.Schema({
   costExceptions: String,
   maxTime: String,
   flagged: Number,
-  flaggerId: [String]
+  flaggerIds: [String]
 });
 
 
