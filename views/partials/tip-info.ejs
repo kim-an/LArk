@@ -1,12 +1,47 @@
 <template id="tip-info">
-  <div class="form-group">
-    <p>Parking Type: {{parkingType}}</p>
-    <p>Valid Hours:<br>
-    {{#each validHours}}{{day}}: {{startTime}} to {{endTime}}<br>{{/each}}</p>
-    <p>Cost: {{cost}}</p>
-    <p>Maximum Time: {{maxTime}} </p>
-    <p>Permit: {{permit}} </p>
-    <p>Comment: {{comment.message}}</p>
-  </div>
+  <table class="table display-info">
+    <thead>
+      <tr>
+        <th>Parking Type</th>
+        <td id="parking-type"> {{parkingType}}
+        <% if (user) { %>
+          <button id="flag-button" data-id="{{_id}}"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span></button>
+        <% } %>
+        </td>
+      </tr>
+      <tr>
+        <th id="valid-hours">Valid Hours</th>
+        <td id="valid-hours-input">{{#each validHours}}{{day}}: {{startTime}} to {{endTime}}<br>{{/each}}</p></td>
+      </tr>
+      <tr>
+        <th>Cost</th>
+        <td id="cost"> {{cost}} </td>
+      </tr>
+      <tr>
+        <th>Maximum Time</th>
+        <td id="max-time">{{maxTime}}</td>
+      </tr>
+      <tr>
+        <th>Permit</th>
+        <td id="permit">
+          {{#if permit}}
+            Required
+          {{else}}
+            Not Required
+          {{/if}}
+        </td>
+      </tr>
+      <tr>
+        <th>Comment</th>
+        <td id="comment" data-id="{{_id}}">{{comment}}</td>
+      </tr>
+    </thead>
+  </table>
+  <% if (user) { %>
+    <div class="form-inline">
+      <button id="edit-tip" type="submit" class="btn btn-warning btn-sm">Edit</button>
+      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+    </div>
+  <% } %>
 </template>
 

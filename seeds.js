@@ -12,7 +12,7 @@ Promise.all([
     userID: "57fc315af5eca32f92259e4a",
     parkingType: "Street",
     coordinates: {lat: 34.0305689, lng: -118.2663225},
-    comment: {message: "This street is whack"},
+    comment: "This street parking is whack",
     validHours: [
       {day: 'Sun', startTime: '8am', endTime: '6pm'},
       {day: 'Mon', startTime: '8am', endTime: '6pm'},
@@ -33,7 +33,7 @@ Promise.all([
     userID: "57fc315af5eca32f92259e4a",
     parkingType: "Street",
     coordinates: {lat: 34.031094, lng: -118.267396},
-    comment: {message: "This street is Hill st with cross streets: 21st and Washington"},
+    comment: "This street is Hill st with cross streets: 21st and Washington",
     validHours: [
       {day: 'Sun', startTime: '8am', endTime: '6pm'},
       {day: 'Mon', startTime: '8am', endTime: '6pm'},
@@ -54,7 +54,7 @@ Promise.all([
     userID: "57fc315af5eca32f92259e4a",
     parkingType: "Outdoor Lot",
     coordinates: {lat: 34.030231, lng: -118.266989},
-    comment: {message: "This is the Reef parking lot"},
+    comment: "This is the Reef parking lot",
     validHours: [
       {day: 'Sun', startTime: '5am', endTime: '11pm'},
       {day: 'Mon', startTime: '5am', endTime: '11pm'},

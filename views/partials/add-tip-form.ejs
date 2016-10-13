@@ -1,60 +1,134 @@
 <template id="google-maps-form">
-  <div class="form-field">
-    Parking type:
-    <select name="parkingType" id="parkingTypeField">
-      <option value="Street">Street</option>
-      <option value="Outdoor Lot">Outdoor Lot</option>
-      <option value="Indoor Lot">Indoor Lot</option>
-    </select>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+        <h4>Add Tip</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        Parking type:
+      </div>
+      <div class="col-xs-3">
+        <select name="parkingType" id="parkingTypeField">
+          <option value="Street">Street</option>
+          <option value="Outdoor Lot">Outdoor Lot</option>
+          <option value="Indoor Lot">Indoor Lot</option>
+        </select>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-xs-3">
+      Valid hours:
+    </div>
+    <div class="col-xs-7" id="appendThis">
+      <select name="validHours[day]" class="day">
+        <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
+          <option value="<%= day %>"><%= day %></option>
+        <% }) %>
+      </select>
+      From
+      <select name="validHours[startTime]" class="start">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>">
+            <%= i > 12 ? i - 12 : i %>
+            <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+          </option>
+        <% }; %>
+      </select>
+      to
+      <select name="validHours[endTime]" class="end">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>">
+            <%= i > 12 ? i - 12 : i %>
+            <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+          </option>
+        <% }; %>
+      </select>
+      </div> <!-- closes col-xs-7 !-->
+    </div> <!-- closes row !-->
+    <div class="row" id="clickPlus">
+      look at this +
+    </div>
+  <div class="row">
+    <div class="col-xs-3">
+      Max Time:
+    </div>
+    <div class="col-xs-3">
+      <select name="maxTime" id="maxTimeField">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>"><%= i %> <%= i < 2 ? 'hour':'hours' %></option>
+        <% }; %>
+      </select>
+    </div>
   </div>
-  <div class="form-field">
-    Valid hours:
-    <select name="validHours[day]" id="validHoursDayField">
-      <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
-        <option value="<%= day %>"><%= day %></option>
-      <% }) %>
-    </select>
-    <select name="validHours[startTime]" id="validHoursStartTimeField">
-      <% for (var i = 1; i < 25; i++){ %>
-        <option value="<%= i %>">
-          <%= i > 12 ? i - 12 : i %>
-          <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
-        </option>
-      <% }; %>
-    </select>
-    <select name="validHours[endTime]" id="validHoursEndTimeField">
-      <% for (var i = 1; i < 25; i++){ %>
-        <option value="<%= i %>">
-          <%= i > 12 ? i - 12 : i %>
-          <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
-        </option>
-      <% }; %>
-    </select>
+  <div class="row">
+    <div class="col-xs-3">
+        Permit:
+    </div>
+    <div class="col-xs-9"
+      <fieldset>
+          <label for="required"><input type="radio" name="permit" value=true checked>Required</label>
+          <label for="not-required"><input type="radio" name="permit" value=false>Not required</label>
+      </fieldset>
+    </div>
   </div>
-  <div class="form-field">
-    Max Time:
-    <select name="maxTime" id="maxTimeField">
-      <% for (var i = 1; i < 25; i++){ %>
-        <option value="<%= i %>"><%= i %> <%= i < 2 ? 'hour':'hours' %></option>
-      <% }; %>
-    </select>
+  <div class="row">
+    <div class="col-xs-3">
+      Cost:
+    </div>
+    <div class="col-xs-3">
+      $<input type="text" id="costField">/hr
+    </div>
   </div>
-  <div class="form-field">
-    <fieldset>
-      Permit:
-        <label for="required"><input type="radio" name="permit" value=true checked>Required</label>
-        <label for="not-required"><input type="radio" name="permit" value=false>Not required</label>
-    </fieldset>
-  </div>
-  <div class="form-field">
-    Cost:
-    $<input type="text" id="costField">/hr
-  </div>
-  <div class="form-field">
-    Cost Exceptions:
+  <div class="row">
+    <div class="col-xs-3">
+      Cost Exceptions:
+    </div>
+    <div class="col-xs-3">
      <input type="text" id="costExceptionField">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      Comments:
+    </div>
+    <div class="col-xs-6">
+      <textarea cols="20" rows="5" id="commentsField"></textarea>
+    </div>
   </div>
   <div class="submit-field">
     <button id="submit">Submit</button>
+  </div>
+  </div> <!-- closes container div !-->
+</template>
+
+<template id="addRow">
+  <div class="row">
+    <div class="col-xs-9">
+      <select name="validHours[day]" class="day">
+        <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
+          <option value="<%= day %>"><%= day %></option>
+        <% }) %>
+      </select>
+      From
+      <select name="validHours[startTime]" class="start">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>">
+            <%= i > 12 ? i - 12 : i %>
+            <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+          </option>
+        <% }; %>
+      </select>
+      to
+      <select name="validHours[endTime]" class="end">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>">
+            <%= i > 12 ? i - 12 : i %>
+            <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+          </option>
+        <% }; %>
+      </select>
+    </div>
   </div>
 </template>

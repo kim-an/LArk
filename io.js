@@ -10,10 +10,6 @@ io.on('connection', function (socket){
       socket.emit('renderMarkers', tips);
     });
   });
-  socket.on('submitData', function(data){
-    //TODO update (or post, depending on discussion) tip with passed in data
-    // emit the updated tip
-  });
 });
 
 module.exports = io;

@@ -6,6 +6,7 @@ var addTipToggle = false;
 
 var $addTip = $('#add-tip');
 var $plus = $('#plus');
+var $map = $('#map');
 
 var arrTips = [];
 
@@ -19,6 +20,11 @@ navigator.geolocation.watchPosition(function(obj){
     console.log('map doesnt exist yet');
   }
 });
+
+// run through each tip and see
+function runThroughTips(tip){
+  tip.flaggerId.findIndex()
+}
 
 function render(tips) {
   tips.forEach(function(tip) {
@@ -41,13 +47,47 @@ function render(tips) {
     var latLng = {lat: tip.coordinates.lat, lng: tip.coordinates.lng};
     var marker = new google.maps.Marker({
       position: latLng,
-      map: map
+      map: map,
+      icon: '../images/LArk_pin_01.png'
     });
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
     });
   });
 }
+
+// for center button on map
+function CenterControl(controlDiv, map) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to recenter the map';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Center Map';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners.
+        controlUI.addEventListener('click', function() {
+          map.setCenter(myLocation);
+        });
+
+      }
 
 function initMap() {
   // styled map
@@ -88,6 +128,14 @@ function initMap() {
     center: startLocation
   });
 
+  // for center button on map /////////////////////
+    var centerControlDiv = document.createElement('div');
+    var centerControl = new CenterControl(centerControlDiv, map);
+
+    centerControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
+
+
   // associating the styled map w/existing map
   map.mapTypes.set('styled_map', styledMapType);
   map.setMapTypeId('styled_map');
@@ -98,6 +146,8 @@ function initMap() {
 
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
+    socket.emit('getTips');
+    socket.on('renderMarkers', render);
     if(addTipToggle) {
       // disable add-tip
       addTipToggle = false;
@@ -111,36 +161,79 @@ function initMap() {
 
       var marker = new google.maps.Marker({
         position: {lat: clickLat, lng: clickLng},
-        map: map
+        map: map,
+        icon: '../images/LArk_pin_01.png'
       });
 
       infoWindow.open(map, marker);
-        // not necessary?
-        // socket.emit('getTips');
-        // socket.on('renderMarkers', render);
+
+// submit button action
+      $map.on('click', '#submit', function(evt){
+        newTip = {
+          parkingType: $('#parkingTypeField').val(),
+          coordinatesLat: clickLat,
+          coordinatesLng: clickLng,
+          validHours: getValidHours(),
+          maxTime: $('#maxTimeField').val(),
+          permit: $('input[name="permit"]:checked').val(),
+          cost: $('#costField').val(),
+          costExceptions: $('#costExceptionField').val(),
+          comment: $('#commentsField').val()
+        }; // close newTip object
+        console.log('this is from the client: ' + newTip);
+        arrTips.push(newTip);
+        $.post('/tips', newTip, function(tip){
+          console.log(tip);
+          infoWindow.close();
+        }); // close post
+      });
     } // close addTipToggle
   }); // close addListener
 
-// submit button action
-  $('#map').on('click', '#submit', function(evt){
-    newTip = {
-      parkingType: $('#parkingTypeField').val(),
-      coordinatesLat: clickLat,
-      coordinatesLng: clickLng,
-      validHoursDay: $('#validHoursDayField').val(),
-      validHoursStart: $('#validHoursStartTimeField').val(),
-      validHoursEnd: $('#validHoursEndTimeField').val(),
-      maxTime: $('#maxTimeField').val(),
-      permit: $('input[name="permit"]:checked').val(),
-      costField: $('#costField').val(),
-      costExceptions: $('#costExceptionField').val()
-    }; // close newTip object
-    console.log('this is from the client: ' + newTip);
-    arrTips.push(newTip);
-    $.post('/tips', newTip, function(tip){
-      console.log(tip);
-    }); // close post
-  } );
+  // add edit tip
+  editTip();
+
+// listener for flag
+$map.on('click', '#flag-button', function(evt){
+  console.log('flag clicked!');
+  var tipId = $('#flag-button').attr('data-id');
+  // socket.emit('flagTip', tipId);
+  $.ajax({
+    url: `/tips/${tipId}`,
+    method: 'PUT',
+    data: {tipId: tipId}
+  }).done(function(response){
+    $('#flag-button').css("color", "red");
+    console.log(response);
+  });
+});
+
+  // plus button on form
+  $map.on('click', '#clickPlus', function(evt){
+    $('#appendThis').append($('#addRow').html());
+  });
+
+  function getValidHours() {
+    var days = $('.day').toArray().map(function(dayEl) {
+      return dayEl.value;
+    });
+    var starts = $('.start').toArray().map(function(startEl) {
+      return startEl.value;
+    });
+    var ends = $('.end').toArray().map(function(endEl) {
+      return endEl.value;
+    });
+    return days.map(function(day, idx){
+      return {
+        day: day,
+        startTime: starts[idx],
+        endTime: ends[idx]
+      };
+    });
+  }
+
+
+  window.getValid = getValidHours;
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();
@@ -221,6 +314,50 @@ function geocodeAddress(geocoder, resultsMap) {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
+}
+
+function editTip(){
+    // edit-tip
+  $map.on('click', '#edit-tip', function(e) {
+    console.log('edit clicked');
+    // replace display info elements with corresponding input
+    $('#parking-type').html("<select name='parkingType' id='parking-type-edit'><option value='Street'>Street</option><option value='Outdoor Lot'>Outdoor Lot</option><option value='Indoor Lot'>Indoor Lot</option></select>");
+    // TODO Need to replace valid hours with new input
+    // var validHoursHTML = '';
+    // $('#valid-hours-input').html()
+    $('#cost').html("$<input type='text' id='cost-edit'>/hr");
+    var maxTimeHTML = '';
+    for (var i = 1; i < 25; i++) {
+      maxTimeHTML += `<option value=${i}>${i}</option>`
+    }
+    $('#max-time').html(`<select name='maxTime' id='max-time-edit'>${maxTimeHTML}</select>`);
+    var permitHTML = '<label for="required"><input type="radio" name="permit" value=true checked>Required</label><label for="not-required"><input type="radio" name="permit" value=false>Not required</label>';
+    $('#permit').html(`<fieldset>${permitHTML}</fieldset>`)
+    $('#comment').html(`<textarea cols="20" rows="3" id="comment-edit"></textarea>`)
+    $('#edit-tip').text('Submit');
+    $('#edit-tip').addClass('submit-edit');
+    $('#edit-tip').removeAttr('id');
+  });
+
+  // Put to update tip
+  $map.on('click', '.submit-edit', function(e) {
+    console.log("submit edit clicked!");
+    var editedTip = {
+      tipId: $('#comment').attr('data-id'),
+      parkingType: $('#parking-type-edit').val(),
+      maxTime: $('#max-time-edit').val(),
+      permit: $('input[name="permit"]:checked').val(),
+      cost: $('#cost-edit').val(),
+      comment: $('#comment-edit').val()
+    }
+    $.ajax({
+      url: `/tip`,
+      method: 'PUT',
+      data: editedTip
+    }).done(function(response){
+      console.log(response);
+    });
+  })
 }
 
 

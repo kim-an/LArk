@@ -12,8 +12,8 @@ var validHoursSchema = new mongoose.Schema({
 
 var tipSchema = new mongoose.Schema({
   userID: {
-    type: mongoose.Schema.Types.ObjectId
-    // required: true
+    type: mongoose.Schema.Types.ObjectId,
+    required: true
   },
   parkingType: {
     type: String,
@@ -26,21 +26,23 @@ var tipSchema = new mongoose.Schema({
     // },
     // required: true
   },
-  comment: {
-    message: String,
-    createdAt: {
-      type: Date,
-      default: Date.now
+  comment: String,
+  validHours: [
+    {
+      day: String,
+      startTime: String,
+      endTime: String
     }
-  },
-  validHours: [validHoursSchema],
+  ],
   permit: {
     type: Boolean
     // required: true
   },
   cost: String,
   costExceptions: String,
-  maxTime: String
+  maxTime: String,
+  flagged: Number,
+  flaggerIds: [String]
 });
 
 

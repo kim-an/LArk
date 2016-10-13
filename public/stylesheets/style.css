@@ -1,3 +1,7 @@
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Lalezar', cursive;
+font-family: 'Fredoka One', cursive; */
+
 #title {
   border: 1px solid black;
   text-align: center;
@@ -10,25 +14,38 @@ h1 {
 }
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 }
 
 
-ul {
+/*ul {
   text-align: center;
-}
+}*/
 
 a {
   color: white;
 }
 
+a:hover {
+  color: rgba(211, 211, 211, 1);
+  text-decoration: none;
+}
+
+#googleBtn {
+  background-color: #DD4B39;
+  position: relative;
+  left: 70vw;
+}
+
 #log-in {
-  padding-left: 1005px;
+  button-color: #DD4B39;
 }
 
 #log-out {
-  padding-left: 1005px;
+  position: relative;
+  left: 75vw;
 }
 
 #about-us {
@@ -68,15 +85,18 @@ a {
 
 #map {
   height: 90vh;
-  width: 100vw;
+  width: 95vw;
+  margin: 0 auto;
 }
 
 #top-bar {
   height: 8vh;
   width: 100vw;
-  background-color: rgba(61, 88, 151, 1);
+  /* background-color: rgba(0, 0, 0, 1); */
+  background-image: url(../images/dark-blue-gradient.jpg);
+  background-size: cover;
   display: flex;
-  /*justify-content: center;*/
+  /*justify-content: center; */
   align-items: center;
 }
 
@@ -94,6 +114,26 @@ li {
   padding: 1vw;
 }
 
-#info-box {
-  background-color: rgba(61, 88, 151, .5);
+#valid-hours {
+  vertical-align: top;
 }
+
+#flag-button {
+  float: right;
+  border: 0;
+  background-color: white;
+}
+
+#flag-button:hover {
+  color: red;
+}
+
+#flag-button[disabled]{
+  color: red;
+}
+
+.table>thead>tr>td {
+    border-bottom: 2px solid #ddd;
+}
+
+
