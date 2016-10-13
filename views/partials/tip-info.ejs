@@ -23,11 +23,17 @@
       </tr>
       <tr>
         <th>Permit</th>
-        <td>{{permit}}</td>
+        <td>
+          {{#if permit}}
+            Required
+          {{else}}
+            Not Required
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <th>Comment</th>
-        <td>{{comment}}</td>
+        <td>{{comment.message}}</td>
       </tr>
     </thead>
   </table>
