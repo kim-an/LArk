@@ -6,7 +6,7 @@ io.on('connection', function (socket){
   console.log('connected to socket.io!');
   // get all tips and pass to client
   socket.on('getTips', function() {
-    Tip.find({}, function(err, tips) {
+    Tip.find({ flagged: { $lt: 10 } }, function(err, tips) {
       socket.emit('renderMarkers', tips);
     });
   });

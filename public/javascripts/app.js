@@ -10,21 +10,8 @@ var $map = $('#map');
 
 var arrTips = [];
 
-//TODO have option to clear this
-navigator.geolocation.watchPosition(function(obj){
-  myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
-  console.log(myLocation);
-  if (map){
-    map.panTo(myLocation);
-  } else {
-    console.log('map doesnt exist yet');
-  }
-});
 
-// run through each tip and see
-function runThroughTips(tip){
-  tip.flaggerId.findIndex()
-}
+function initMap() {
 
 function render(tips) {
   tips.forEach(function(tip) {
@@ -52,6 +39,10 @@ function render(tips) {
     });
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
+      if (tip.flaggerIds.includes(currentUserId)){
+        $('#table-head').prepend($('#flagged-tip').html());
+        $('#flag-button').remove();
+      }
     });
   });
 }
@@ -89,8 +80,6 @@ function CenterControl(controlDiv, map) {
 
       }
 
-function initMap() {
-  // styled map
   var styledMapType = new google.maps.StyledMapType([
     {
       "featureType": "all",
@@ -128,7 +117,7 @@ function initMap() {
     center: startLocation
   });
 
-  // for center button on map /////////////////////
+  // for center button on map
     var centerControlDiv = document.createElement('div');
     var centerControl = new CenterControl(centerControlDiv, map);
 
@@ -194,19 +183,23 @@ function initMap() {
   editTip();
 
 // listener for flag
-$map.on('click', '#flag-button', function(evt){
-  console.log('flag clicked!');
-  var tipId = $('#flag-button').attr('data-id');
-  // socket.emit('flagTip', tipId);
+$('#map').on('click', '#flag-button', function(evt){
+  console.log('clicked flag');
+  var $flagButton = $('#flag-button');
+  if ( $flagButton.prop('disabled') ){
+    return false;
+  }
+  var tipId = $flagButton.attr('data-id');
   $.ajax({
     url: `/tips/${tipId}`,
     method: 'PUT',
     data: {tipId: tipId}
   }).done(function(response){
-    $('#flag-button').css("color", "red");
-    console.log(response);
+    $flagButton.prop('disabled', true);
   });
 });
+
+
 
   // plus button on form
   $map.on('click', '#clickPlus', function(evt){
@@ -231,9 +224,6 @@ $map.on('click', '#flag-button', function(evt){
       };
     });
   }
-
-
-  window.getValid = getValidHours;
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();

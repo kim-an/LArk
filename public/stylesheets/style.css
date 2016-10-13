@@ -121,14 +121,15 @@ li {
 #flag-button {
   float: right;
   border: 0;
+  color: black;
   background-color: white;
 }
 
-#flag-button:hover {
+#flag-button:hover span {
   color: red;
 }
 
-#flag-button[disabled]{
+#flag-button[disabled] span {
   color: red;
 }
 
@@ -140,4 +141,7 @@ li {
   width: 2.5vw;
 }
 
+#red-flag {
+  color: red;
+}
 
