@@ -1,3 +1,7 @@
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Lalezar', cursive;
+font-family: 'Fredoka One', cursive; */
+
 #title {
   border: 1px solid black;
   text-align: center;
@@ -10,7 +14,8 @@ h1 {
 }
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 }
 
@@ -21,6 +26,11 @@ ul {
 
 a {
   color: white;
+}
+
+a:hover {
+  color: rgba(211, 211, 211, 1);
+  text-decoration: none;
 }
 
 #log-in {
@@ -74,9 +84,11 @@ a {
 #top-bar {
   height: 8vh;
   width: 100vw;
-  background-color: rgba(61, 88, 151, 1);
+  /* background-color: rgba(0, 0, 0, 1); */
+  background-image: url(../images/dark-blue-gradient.jpg);
+  background-size: cover;
   display: flex;
-  /*justify-content: center;*/
+  /*justify-content: center; */
   align-items: center;
 }
 
