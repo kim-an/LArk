@@ -33,8 +33,14 @@ a:hover {
   text-decoration: none;
 }
 
+#googleBtn {
+  background-color: #DD4B39;
+  position: relative;
+  left: 70vw;
+}
 #log-in {
-  padding-left: 1005px;
+  /*padding-left: 1005px;*/
+  button-color: #DD4B39;
 }
 
 #log-out {
