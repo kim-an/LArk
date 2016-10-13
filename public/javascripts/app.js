@@ -9,23 +9,6 @@ var $plus = $('#plus');
 
 var arrTips = [];
 
-//TODO have option to clear this
-navigator.geolocation.watchPosition(function(obj){
-  myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
-  console.log(myLocation);
-  if (map){
-    map.panTo(myLocation);
-  } else {
-    console.log('map doesnt exist yet');
-  }
-});
-
-// run through each tip and see
-function runThroughTips(tip){
-  tip.flaggerId.findIndex()
-}
-
-
 function render(tips) {
   tips.forEach(function(tip) {
     var content = $('#tip-info').html();
