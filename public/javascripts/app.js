@@ -79,7 +79,7 @@ function CenterControl(controlDiv, map) {
         controlText.style.lineHeight = '38px';
         controlText.style.paddingLeft = '5px';
         controlText.style.paddingRight = '5px';
-        controlText.innerHTML = 'Center Map';
+        controlText.innerHTML = '<img id="center-map-control" src="../images/center-map.png">';
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners.
@@ -133,7 +133,7 @@ function initMap() {
     var centerControl = new CenterControl(centerControlDiv, map);
 
     centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(centerControlDiv);
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 
 
   // associating the styled map w/existing map

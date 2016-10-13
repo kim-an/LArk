@@ -133,7 +133,11 @@ li {
 }
 
 .table>thead>tr>td {
-    border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+}
+
+#center-map-control {
+  width: 2.5vw;
 }
 
 
