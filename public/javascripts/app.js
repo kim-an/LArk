@@ -12,11 +12,9 @@ var arrTips = [];
 //TODO have option to clear this
 navigator.geolocation.watchPosition(function(obj){
   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
-  console.log(myLocation);
   if (map){
     map.panTo(myLocation);
   } else {
-    console.log('map doesnt exist yet');
   }
 });
 
@@ -49,6 +47,7 @@ function render(tips) {
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
     });
+    console.log(tip.flaggerIds, currentUserId);
     if (!tip.flaggerIds.includes(currentUserId)){
       $('#flag-button').prop('disabled', true);
     }
@@ -137,27 +136,28 @@ function initMap() {
       costExceptions: $('#costExceptionField').val(),
       comments: $('#commentsField').val()
     }; // close newTip object
-    console.log('this is from the client: ' + newTip);
     arrTips.push(newTip);
     $.post('/tips', newTip, function(tip){
-      console.log(tip);
       infoWindow.close();
     }); // close post
   } );
     } // close addTipToggle
   }); // close addListener
 
+
+
 // listener for flag
 $('#map').on('click', '#flag-button', function(evt){
-  console.log('flag clicked!');
+  if ($('#flag-button').prop('disabled')){
+    return false;
+  }
   var tipId = $('#flag-button').attr('data-id');
   $.ajax({
     url: `/tips/${tipId}`,
     method: 'PUT',
     data: {tipId: tipId}
   }).done(function(response){
-    $('#flag-button').css("color", "red");
-    console.log(response);
+    $('#flag-button').css('color', 'red').prop('disabled', 'true');
   });
 });
 
@@ -193,7 +193,6 @@ $('#map').on('click', '#flag-button', function(evt){
 
   // Click event to go to address
   $('body').on('click', '#getAddress', function(e) {
-    console.log('get address...');
     e.preventDefault();
     geocodeAddress(geocoder, map);
   });
@@ -251,12 +250,8 @@ $('#map').on('click', '#flag-button', function(evt){
 
 function geocodeAddress(geocoder, resultsMap) {
   var address = document.getElementById('address').value;
-  console.log(address);
   geocoder.geocode({'address': address}, function(results, status) {
     // use results[0].geometry.location.lat(), results[0].geometry.location.lng() to get lat/long
-    console.log(results);
-    console.log(results[0].geometry.location.lat());
-    console.log(results[0].geometry.location.lng());
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
