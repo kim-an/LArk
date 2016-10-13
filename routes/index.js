@@ -49,14 +49,13 @@ router.post('/tips', isLoggedIn, function(req, res, next){
   );
 });
 
-// these 3 lines took me 20 minutes. change this and I'll cut you :D
 router.put('/tips/:id', function(req, res, next){
   // tip find by id, find user id
   // if that user id exists in the the flaggersId array
   // don't push it
   Tip.findById(req.body.tipId, function(err, tip){
     if (err) next(err);
-    if (!tip.flaggerIds.includes(tip.userID)){
+    if (!tip.flaggerIds.includes(req.user._id.toString())){
       tip.flagged += 1;
       tip.flaggerIds.push(req.user._id);
       tip.save(function(err){
@@ -64,6 +63,7 @@ router.put('/tips/:id', function(req, res, next){
         res.status(200).json(tip);
       });
     }
+    res.status(400, 'You have already flagged this tip');
   });
 });
 

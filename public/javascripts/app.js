@@ -38,9 +38,9 @@ function render(tips) {
     marker.addListener('click', function(){
       infoWindow.open(map, marker);
     });
-    console.log(tip.flaggerIds, currentUserId);
+    console.log(tip.flaggerIds, currentUserId, tip.flaggerIds.includes(currentUserId));
     if (tip.flaggerIds.includes(currentUserId)){
-      console.log('this one includes the id');
+      console.log('this includes method executed');
       $('#flag-button').prop('disabled', true);
     }
   });
@@ -135,18 +135,19 @@ function render(tips) {
 
 // listener for flag
 $('#map').on('click', '#flag-button', function(evt){
-  if ($('#flag-button').prop('disabled')){
-    return;
-  }
   console.log('clicked flag');
-  var tipId = $('#flag-button').attr('data-id');
+  var $flagButton = $('#flag-button');
+  if ( $flagButton.prop('disabled') ){
+    return false;
+  }
+  // $('#flag-button').prop('disabled', true);
+  var tipId = $flagButton.attr('data-id');
   $.ajax({
     url: `/tips/${tipId}`,
     method: 'PUT',
     data: {tipId: tipId}
   }).done(function(response){
-    $('#flag-button').prop('disabled', 'true');
-    console.log('returned from database');
+    $flagButton.prop('disabled', true);
   });
 });
 
