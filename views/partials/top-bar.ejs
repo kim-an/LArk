@@ -1,16 +1,18 @@
 <nav>
   <div id="top-bar">
     <% include ../welcome %>
-    <div id="about-us">
-      <ul class="list-unstyled">
-        <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#instructionModal">Instructions</a></li>
-        <% include ./tutorial %>
+    <div id="instructions">
+      <ul>
+        <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#instructionModal">INSTRUCTIONS</a></li>
+        <% include ./instructions %>
       </ul>
+    </div>
+    <div id="about-us">
       <ul class="list-unstyled">
         <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#aboutUsModal">ABOUT US</a></li>
         <% include ./about-us %>
       </ul>
-      </div> <!-- closes container -->
+    </div> <!-- closes container -->
         <!-- check to see if user is logged in or out -->
         <div>
             <% if (user) { %>
