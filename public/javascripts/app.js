@@ -127,9 +127,10 @@ function initMap() {
       parkingType: $('#parkingTypeField').val(),
       coordinatesLat: clickLat,
       coordinatesLng: clickLng,
-      validHoursDay: $('#validHoursDayField').val(),
-      validHoursStart: $('#validHoursStartTimeField').val(),
-      validHoursEnd: $('#validHoursEndTimeField').val(),
+      validHours: getValidHours(),
+      // validHoursDay: $('#validHoursDayField').val(),
+      // validHoursStart: $('#validHoursStartTimeField').val(),
+      // validHoursEnd: $('#validHoursEndTimeField').val(),
       maxTime: $('#maxTimeField').val(),
       permit: $('input[name="permit"]:checked').val(),
       cost: $('#costField').val(),
@@ -143,6 +144,33 @@ function initMap() {
       console.log(tip);
     }); // close post
   } );
+
+  // plus button on form
+  $('#map').on('click', '#clickPlus', function(evt){
+    console.log('plus clicked!');
+    $('#appendThis').append($('#addRow').html());
+  });
+
+  function getValidHours() {
+    var days = $('.day').toArray().map(function(dayEl) {
+      return dayEl.value;
+    });
+    var starts = $('.start').toArray().map(function(startEl) {
+      return startEl.value;
+    });
+    var ends = $('.end').toArray().map(function(endEl) {
+      return endEl.value;
+    });
+    return days.map(function(day, idx){
+      return {
+        day: day,
+        startTime: starts[idx],
+        endTime: ends[idx]
+      };
+    });
+  }
+
+  window.getValid = getValidHours;
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();

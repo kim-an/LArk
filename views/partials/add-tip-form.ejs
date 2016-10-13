@@ -19,14 +19,14 @@
     <div class="col-xs-3">
       Valid hours:
     </div>
-    <div class="col-xs-9">
-      <select name="validHours[day]" id="validHoursDayField">
+    <div class="col-xs-7" id="appendThis">
+      <select name="validHours[day]" class="day">
         <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
           <option value="<%= day %>"><%= day %></option>
         <% }) %>
       </select>
       From
-      <select name="validHours[startTime]" id="validHoursStartTimeField">
+      <select name="validHours[startTime]" class="start">
         <% for (var i = 1; i < 25; i++){ %>
           <option value="<%= i %>">
             <%= i > 12 ? i - 12 : i %>
@@ -35,7 +35,7 @@
         <% }; %>
       </select>
       to
-      <select name="validHours[endTime]" id="validHoursEndTimeField">
+      <select name="validHours[endTime]" class="end">
         <% for (var i = 1; i < 25; i++){ %>
           <option value="<%= i %>">
             <%= i > 12 ? i - 12 : i %>
@@ -43,8 +43,11 @@
           </option>
         <% }; %>
       </select>
+      </div> <!-- closes col-xs-7 !-->
+    </div> <!-- closes row !-->
+    <div class="row" id="clickPlus">
+      look at this +
     </div>
-  </div>
   <div class="row">
     <div class="col-xs-3">
       Max Time:
@@ -96,4 +99,34 @@
     <button id="submit">Submit</button>
   </div>
   </div> <!-- closes container div !-->
+</template>
+
+<template id="addRow">
+  <div class="row">
+    <div class="col-xs-9">
+      <select name="validHours[day]" class="day">
+        <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
+          <option value="<%= day %>"><%= day %></option>
+        <% }) %>
+      </select>
+      From
+      <select name="validHours[startTime]" class="start">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>">
+            <%= i > 12 ? i - 12 : i %>
+            <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+          </option>
+        <% }; %>
+      </select>
+      to
+      <select name="validHours[endTime]" class="end">
+        <% for (var i = 1; i < 25; i++){ %>
+          <option value="<%= i %>">
+            <%= i > 12 ? i - 12 : i %>
+            <%= (i < 12 || i > 23) ? 'AM' : 'PM' %>
+          </option>
+        <% }; %>
+      </select>
+    </div>
+  </div>
 </template>
