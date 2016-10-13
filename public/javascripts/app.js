@@ -135,7 +135,7 @@ function initMap() {
       permit: $('input[name="permit"]:checked').val(),
       cost: $('#costField').val(),
       costExceptions: $('#costExceptionField').val(),
-      comments: $('#commentsField').val()
+      comment: $('#commentsField').val()
     }; // close newTip object
     console.log('this is from the client: ' + newTip);
     arrTips.push(newTip);
