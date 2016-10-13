@@ -54,8 +54,10 @@ router.put('/tips/:id', function(req, res, next){
   Tip.findByIdAndUpdate(req.body.tipId, { $inc: { flagged: 1}}, function (err, tip){
     if (err) next(err);
     tip.flaggerIds.push(req.user._id);
-    console.log('updated!');
-    res.status(201).json(tip);
+    tip.save(function(err){
+      console.log('updated!');
+      res.status(201).json(tip);
+    });
   });
 });
 
