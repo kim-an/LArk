@@ -151,7 +151,7 @@ function initMap() {
 
   // edit-tip
 $map.on('click', '#edit-tip', function(e) {
-  console.log('clicked');
+  console.log('edit clicked');
   // replace display info elements with corresponding input
   $('#parking-type').html("<select name='parkingType' id='parking-type-edit'><option value='Street'>Street</option><option value='Outdoor Lot'>Outdoor Lot</option><option value='Indoor Lot'>Indoor Lot</option></select>");
   // TODO Need to replace valid hours with new input
@@ -168,7 +168,28 @@ $map.on('click', '#edit-tip', function(e) {
   $('#comment').html(`<textarea cols="20" rows="3" id="comment-edit"></textarea>`)
   $('#edit-tip').text('Submit');
   $('#edit-tip').addClass('submit-edit');
+  $('#edit-tip').removeAttr('id');
 });
+
+// Put to update tip
+$map.on('click', '.submit-edit', function(e) {
+  console.log("submit edit clicked!");
+  var editedTip = {
+    parkingType: $('#parking-type-edit').val(),
+    maxTime: $('#max-time-edit').val(),
+    permit: $('input[name="permit"]:checked').val(),
+    cost: $('#cost-edit').val(),
+    comment: $('#comment-edit').val()
+  }
+  $.ajax({
+    url: `/tips/${tipId}`,
+    method: 'PUT',
+    data: editedTip
+  }).done(function(response){
+    console.log(response);
+  });
+
+})
 
 // listener for flag
 $map.on('click', '#flag-button', function(evt){

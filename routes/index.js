@@ -58,6 +58,9 @@ router.put('/tips/:id', function(req, res, next){
   });
 });
 
+router.put('/tip', function(req, res, next){
+})
+
 module.exports = router;
 
 // check to see if user is logged in
