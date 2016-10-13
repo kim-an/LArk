@@ -38,13 +38,14 @@ a:hover {
   position: relative;
   left: 70vw;
 }
+
 #log-in {
-  /*padding-left: 1005px;*/
   button-color: #DD4B39;
 }
 
 #log-out {
-  padding-left: 1005px;
+  position: relative;
+  left: 75vw;
 }
 
 #about-us {
@@ -84,7 +85,8 @@ a:hover {
 
 #map {
   height: 90vh;
-  width: 100vw;
+  width: 95vw;
+  margin: 0 auto;
 }
 
 #top-bar {
