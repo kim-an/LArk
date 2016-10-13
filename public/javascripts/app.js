@@ -98,6 +98,8 @@ function initMap() {
 
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
+    socket.emit('getTips');
+    socket.on('renderMarkers', render);
     if(addTipToggle) {
       // disable add-tip
       addTipToggle = false;
@@ -116,8 +118,6 @@ function initMap() {
 
       infoWindow.open(map, marker);
         // not necessary?
-        // socket.emit('getTips');
-        // socket.on('renderMarkers', render);
     } // close addTipToggle
   }); // close addListener
 
@@ -127,13 +127,13 @@ function initMap() {
       parkingType: $('#parkingTypeField').val(),
       coordinatesLat: clickLat,
       coordinatesLng: clickLng,
-      validHoursDay: $('#validHoursDayField').val(),
-      validHoursStart: $('#validHoursStartTimeField').val(),
-      validHoursEnd: $('#validHoursEndTimeField').val(),
+      validHours: getValidHours(),
       maxTime: $('#maxTimeField').val(),
       permit: $('input[name="permit"]:checked').val(),
-      costField: $('#costField').val(),
-      costExceptions: $('#costExceptionField').val()
+      cost: $('#costField').val(),
+      costExceptions: $('#costExceptionField').val(),
+      comments: $('#commentsField').val()
+      // TODO add flagged key
     }; // close newTip object
     console.log('this is from the client: ' + newTip);
     arrTips.push(newTip);
@@ -141,6 +141,34 @@ function initMap() {
       console.log(tip);
     }); // close post
   } );
+
+  // plus button on form
+  $('#map').on('click', '#clickPlus', function(evt){
+    console.log('plus clicked!');
+    $('#appendThis').append($('#addRow').html());
+  });
+
+  function getValidHours() {
+    var days = $('.day').toArray().map(function(dayEl) {
+      return dayEl.value;
+    });
+    var starts = $('.start').toArray().map(function(startEl) {
+      return startEl.value;
+    });
+    var ends = $('.end').toArray().map(function(endEl) {
+      return endEl.value;
+    });
+    return days.map(function(day, idx){
+      return {
+        day: day,
+        startTime: starts[idx],
+        endTime: ends[idx]
+      };
+    });
+  }
+
+
+  window.getValid = getValidHours;
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();

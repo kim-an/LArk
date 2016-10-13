@@ -33,14 +33,21 @@ var tipSchema = new mongoose.Schema({
       default: Date.now
     }
   },
-  validHours: [validHoursSchema],
+  validHours: [
+    {
+      day: String,
+      startTime: String,
+      endTime: String
+    }
+  ],
   permit: {
     type: Boolean
     // required: true
   },
   cost: String,
   costExceptions: String,
-  maxTime: String
+  maxTime: String,
+  flagged: Number
 });
 
 
