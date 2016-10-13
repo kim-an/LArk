@@ -49,7 +49,10 @@
             <% if (user) { %>
               <a id="log-out" href="/logout">LOG OUT</a>
             <% } else { %>
-              <a id="log-in" href="/auth/google">LOG IN WITH GOOGLE</a>
+                <button id="googleBtn" class="btn btn-block btn-social btn-google">
+                  <a id="log-in" href="/auth/google"><i class="fa fa-google"></i>    Sign in with Google</a>
+               </button>
+
             <% } %>
         </div> <!-- closes log-in container -->
   </div>
