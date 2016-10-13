@@ -56,12 +56,24 @@ router.put('/tips/:id', function(req, res, next){
     tip.flaggerIds.push(req.user._id);
     tip.save(function(err){
       console.log('updated!');
-      res.status(201).json(tip);
+      res.status(200).json(tip);
     });
   });
 });
 
 router.put('/tip', function(req, res, next){
+  Tip.findById(req.body.tipId, function(err, tip){
+    if (err) next(err);
+    tip.parkingType = req.body.parkingType;
+    tip.maxTime = req.body.maxTime;
+    tip.permit = req.body.permit;
+    tip.cost = req.body.cost;
+    tip.comment = req.body.comment;
+    tip.save(function(err){
+      console.log("tip updated");
+      res.status(200).json(tip);
+    })
+  })
 })
 
 module.exports = router;
