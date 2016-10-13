@@ -3,13 +3,13 @@
     <% include ../welcome %>
     <div id="about-us">
       <ul class="list-unstyled">
-        <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#myModal">About Us</a></li>
+        <li><a data-toggle="modal" data-container="body" type="button" data-html="true" href="#" data-target="#myModal">ABOUT US</a></li>
         <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog modal-lg">
             <div class="modal-content" id="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">About Us</h4>
+                <h4 class="modal-title">ABOUT US</h4>
               </div> <!-- closes modal-header -->
               <div class="modal-body">
                 <p>
@@ -44,18 +44,13 @@
           </div>
         </ul>
       </div> <!-- closes container -->
-        <!-- check to see if user is logged in to add tip -->
-        <% if (user) { %>
-          <button id="add-tip">Add Tip</button>
-        <% } %>
         <!-- check to see if user is logged in or out -->
-        <ul class="left">
-          <% if (user) { %>
-            <li><a href="/logout">Logout</a></li>
-          <% } else { %>
-            <li><a href="/auth/google">Login with Google</a></li>
-          <% } %>
-        </ul>
-        </div>
+        <div>
+            <% if (user) { %>
+              <a id="log-out" href="/logout">LOG OUT</a>
+            <% } else { %>
+              <a id="log-in" href="/auth/google">LOG IN WITH GOOGLE</a>
+            <% } %>
+        </div> <!-- closes log-in container -->
   </div>
 </nav>

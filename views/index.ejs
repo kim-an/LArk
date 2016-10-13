@@ -2,21 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+
+    <title>LArk</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="javascripts/pageload.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lalezar|Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <script src="https://apis.google.com/js/api:client.js"></script>
   </head>
   <body>
+    <% include ./partials/tutorial %>
     <% include ./partials/top-bar %>
-    <div id="map"></div>
+    <div id="wrapper">
+     <div id="map"></div>
+    <% include ./partials/add-tip-button %>
+    </div>
     <input id="address" type="text" class="controls" name="street[address]" placeholder="Enter a location">
     <% include ./partials/add-tip-form %>
     <% include ./partials/tip-info %>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script async defer

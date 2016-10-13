@@ -20,6 +20,12 @@ navigator.geolocation.watchPosition(function(obj){
   }
 });
 
+// run through each tip and see
+function runThroughTips(tip){
+  tip.flaggerId.findIndex()
+}
+
+
 function render(tips) {
   tips.forEach(function(tip) {
     var content = $('#tip-info').html();
@@ -98,6 +104,8 @@ function initMap() {
 
   // click at a spot on the map and grab the coordinates, send it to router
   map.addListener('click', function(evt){
+    socket.emit('getTips');
+    socket.on('renderMarkers', render);
     if(addTipToggle) {
       // disable add-tip
       addTipToggle = false;
@@ -116,31 +124,70 @@ function initMap() {
 
       infoWindow.open(map, marker);
         // not necessary?
-        // socket.emit('getTips');
-        // socket.on('renderMarkers', render);
-    } // close addTipToggle
-  }); // close addListener
-
 // submit button action
   $('#map').on('click', '#submit', function(evt){
     newTip = {
       parkingType: $('#parkingTypeField').val(),
       coordinatesLat: clickLat,
       coordinatesLng: clickLng,
-      validHoursDay: $('#validHoursDayField').val(),
-      validHoursStart: $('#validHoursStartTimeField').val(),
-      validHoursEnd: $('#validHoursEndTimeField').val(),
+      validHours: getValidHours(),
       maxTime: $('#maxTimeField').val(),
       permit: $('input[name="permit"]:checked').val(),
-      costField: $('#costField').val(),
-      costExceptions: $('#costExceptionField').val()
+      cost: $('#costField').val(),
+      costExceptions: $('#costExceptionField').val(),
+      comment: $('#commentsField').val()
     }; // close newTip object
     console.log('this is from the client: ' + newTip);
     arrTips.push(newTip);
     $.post('/tips', newTip, function(tip){
       console.log(tip);
+      infoWindow.close();
     }); // close post
   } );
+    } // close addTipToggle
+  }); // close addListener
+
+// listener for flag
+$('#map').on('click', '#flag-button', function(evt){
+  console.log('flag clicked!');
+  var tipId = $('#flag-button').attr('data-id');
+  // socket.emit('flagTip', tipId);
+  $.ajax({
+    url: `/tips/${tipId}`,
+    method: 'PUT',
+    data: {tipId: tipId}
+  }).done(function(response){
+    $('#flag-button').css("color", "red");
+    console.log(response);
+  });
+});
+
+  // plus button on form
+  $('#map').on('click', '#clickPlus', function(evt){
+    $('#appendThis').append($('#addRow').html());
+  });
+
+  function getValidHours() {
+    var days = $('.day').toArray().map(function(dayEl) {
+      return dayEl.value;
+    });
+    var starts = $('.start').toArray().map(function(startEl) {
+      return startEl.value;
+    });
+    var ends = $('.end').toArray().map(function(endEl) {
+      return endEl.value;
+    });
+    return days.map(function(day, idx){
+      return {
+        day: day,
+        startTime: starts[idx],
+        endTime: ends[idx]
+      };
+    });
+  }
+
+
+  window.getValid = getValidHours;
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();
