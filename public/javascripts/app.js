@@ -365,6 +365,14 @@ function editTip(){
 function deleteTip() {
   $map.on('click', '#delete-tip', function(e) {
     console.log('delete clicked!');
+    tipId = $('#comment').attr('data-id');
+    $.ajax({
+      url:'/tip',
+      method: "DELETE",
+      data: {tipId: tipId}
+    }).done(function(response){
+      console.log(response);
+    });
   });
 }
 
