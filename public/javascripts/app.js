@@ -17,6 +17,7 @@ var arrTips = [];
 function initMap() {
 
 function render(tips) {
+
   tips.forEach(function(tip) {
     var content = $('#tip-info').html();
     var template = Handlebars.compile(content);
@@ -176,10 +177,8 @@ function CenterControl(controlDiv, map) {
           costExceptions: $('#costExceptionField').val(),
           comment: $('#commentsField').val()
         }; // close newTip object
-        console.log('this is from the client: ' + newTip);
         arrTips.push(newTip);
         $.post('/tips', newTip, function(tip){
-          console.log(tip);
           infoWindow.close();
         }); // close post
       });
@@ -189,7 +188,6 @@ function CenterControl(controlDiv, map) {
 
 // listener for flag
 $('#map').on('click', '#flag-button', function(evt){
-  console.log('clicked flag');
   var $flagButton = $('#flag-button');
   if ( $flagButton.prop('disabled') ){
     return false;
@@ -296,9 +294,6 @@ function geocodeAddress(geocoder, resultsMap) {
   console.log(address);
   geocoder.geocode({'address': address}, function(results, status) {
     // use results[0].geometry.location.lat(), results[0].geometry.location.lng() to get lat/long
-    console.log(results);
-    console.log(results[0].geometry.location.lat());
-    console.log(results[0].geometry.location.lng());
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
@@ -344,28 +339,25 @@ function editTip(infowindow){
       permit: $('input[name="permit"]:checked').val(),
       cost: $('#cost-edit').val(),
       comment: $('#comment-edit').val()
-    }
+    };
     $.ajax({
       url: `/tip`,
       method: 'PUT',
       data: editedTip
     }).done(function(response){
-      console.log(response);
       infowindow.close();
     });
-  })
+  });
 }
 
 function deleteTip(infowindow, marker) {
   $map.on('click', '#delete-tip', function(e) {
-    console.log('delete clicked!');
     tipId = $('#comment').attr('data-id');
     $.ajax({
       url:'/tip',
       method: "DELETE",
       data: {tipId: tipId}
     }).done(function(response){
-      console.log(response);
       infowindow.close();
       marker.setMap(null);
     });
