@@ -1,5 +1,5 @@
 # LArk
-![Alt text] (/images/LArk_hp.png "Logo")
+![Alt text](./images/LArk_hp.png "Logo")
 
 Park Cheap. Park Safe
 
@@ -31,3 +31,5 @@ Park Cheap. Park Safe
 # Unsolved Problems
 
 * Map centers everytime user adds tip
+* Does not refresh after editing
+* Can't edit parking hours
