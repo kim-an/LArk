@@ -35,21 +35,10 @@ a:hover {
 
 #googleBtn {
   background-color: #DD4B39;
-  position: relative;
-  left: 53vw;
 }
 
 #log-in {
   button-color: #DD4B39;
-}
-
-#log-out {
-  position: relative;
-  left: 60vw;
-}
-
-#about-us {
-  width: 10vw;
 }
 
 #tip-button {
