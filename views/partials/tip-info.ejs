@@ -1,6 +1,10 @@
+<template id="flagged-tip">
+  <tr><td><span class="glyphicon glyphicon-flag" aria-hidden="true" id="red-flag"></span> &nbsp; You flagged this tip.</td></tr>
+</template>
+
 <template id="tip-info">
   <table class="table display-info">
-    <thead>
+    <thead id="table-head">
       <tr>
         <th>Parking Type</th>
         <td id="parking-type"> {{parkingType}}

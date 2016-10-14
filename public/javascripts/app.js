@@ -10,21 +10,8 @@ var $map = $('#map');
 
 var arrTips = [];
 
-//TODO have option to clear this
-navigator.geolocation.watchPosition(function(obj){
-  myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
-  console.log(myLocation);
-  if (map){
-    map.panTo(myLocation);
-  } else {
-    console.log('map doesnt exist yet');
-  }
-});
 
-// run through each tip and see
-function runThroughTips(tip){
-  tip.flaggerId.findIndex()
-}
+function initMap() {
 
 function render(tips) {
   tips.forEach(function(tip) {
@@ -55,6 +42,10 @@ function render(tips) {
         infoWindow.close();
       }
       infoWindow.open(map, marker);
+      if (tip.flaggerIds.includes(currentUserId)){
+        $('#table-head').prepend($('#flagged-tip').html());
+        $('#flag-button').remove();
+      }
       editTip(infoWindow);
       deleteTip(infoWindow);
     });
@@ -64,38 +55,36 @@ function render(tips) {
 // for center button on map
 function CenterControl(controlDiv, map) {
 
-        // Set CSS for the control border.
-        var controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#fff';
-        controlUI.style.border = '2px solid #fff';
-        controlUI.style.borderRadius = '3px';
-        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI.style.cursor = 'pointer';
-        controlUI.style.marginBottom = '22px';
-        controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to recenter the map';
-        controlDiv.appendChild(controlUI);
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
 
-        // Set CSS for the control interior.
-        var controlText = document.createElement('div');
-        controlText.style.color = 'rgb(25,25,25)';
-        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText.style.fontSize = '16px';
-        controlText.style.lineHeight = '38px';
-        controlText.style.paddingLeft = '5px';
-        controlText.style.paddingRight = '5px';
-        controlText.innerHTML = '<img id="center-map-control" src="../images/center-map.png">';
-        controlUI.appendChild(controlText);
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = '<img id="center-map-control" src="../images/center-map.png">';
+  controlUI.appendChild(controlText);
 
-        // Setup the click event listeners.
-        controlUI.addEventListener('click', function() {
-          map.setCenter(myLocation);
-        });
+  // Setup the click event listeners.
+  controlUI.addEventListener('click', function() {
+    map.setCenter(myLocation);
+  });
 
-      }
+}
 
-function initMap() {
-  // styled map
   var styledMapType = new google.maps.StyledMapType([
     {
       "featureType": "all",
@@ -133,12 +122,12 @@ function initMap() {
     center: startLocation
   });
 
-  // for center button on map /////////////////////
-    var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, map);
+  // for center button on map
+  var centerControlDiv = document.createElement('div');
+  var centerControl = new CenterControl(centerControlDiv, map);
 
-    centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
+  centerControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 
 
   // associating the styled map w/existing map
@@ -196,19 +185,23 @@ function initMap() {
 
 
 // listener for flag
-$map.on('click', '#flag-button', function(evt){
-  console.log('flag clicked!');
-  var tipId = $('#flag-button').attr('data-id');
-  // socket.emit('flagTip', tipId);
+$('#map').on('click', '#flag-button', function(evt){
+  console.log('clicked flag');
+  var $flagButton = $('#flag-button');
+  if ( $flagButton.prop('disabled') ){
+    return false;
+  }
+  var tipId = $flagButton.attr('data-id');
   $.ajax({
     url: `/tips/${tipId}`,
     method: 'PUT',
     data: {tipId: tipId}
   }).done(function(response){
-    $('#flag-button').css("color", "red");
-    console.log(response);
+    $flagButton.prop('disabled', true);
   });
 });
+
+
 
   // plus button on form
   $map.on('click', '#clickPlus', function(evt){
@@ -233,9 +226,6 @@ $map.on('click', '#flag-button', function(evt){
       };
     });
   }
-
-
-  window.getValid = getValidHours;
 
   // Geocoder
   var geocoder = new google.maps.Geocoder();
