@@ -206,7 +206,7 @@ $('#map').on('click', '#flag-button', function(evt){
 
   // plus button on form
   $map.on('click', '#clickPlus', function(evt){
-    $('#appendThis').append($('#addRow').html());
+    $('#appendThis').after($('#addRow').html());
   });
 
   function getValidHours() {

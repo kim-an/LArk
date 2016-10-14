@@ -1,27 +1,27 @@
 <template id="google-maps-form">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-3">
+  <table class="table table-responsive borderless">
+    <tr>
+      <td>
         <h4>Add Tip</h4>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">
+      </td>
+    </tr>
+    <tr>
+      <th>
         Parking type:
-      </div>
-      <div class="col-xs-3">
+      </th>
+      <td>
         <select name="parkingType" id="parkingTypeField">
           <option value="Street">Street</option>
           <option value="Outdoor Lot">Outdoor Lot</option>
           <option value="Indoor Lot">Indoor Lot</option>
         </select>
-      </div>
-    </div>
-  <div class="row" id="appendThis">
-    <div class="col-xs-3">
+      </td>
+    </tr>
+  <tr id="appendThis">
+    <th>
       Valid hours:
-    </div>
-    <div class="col-xs-3">
+    </th>
+    <td>
       <select name="validHours[day]" class="day">
         <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
           <option value="<%= day %>"><%= day %></option>
@@ -45,69 +45,71 @@
           </option>
         <% }; %>
       </select>
-      </div> <!-- closes col-xs-7 !-->
-    <div class="col-xs-1">
+    </td>
+    <td>
       <div id="clickPlus">+</div>
-    </div>
-  </div> <!-- closes row !-->
-  <div class="row">
-    <div class="col-xs-3">
+    </td>
+  </tr> <!-- closes row !-->
+  <tr>
+    <th>
       Max Time:
-    </div>
-    <div class="col-xs-3">
+    </th>
+    <td>
       <select name="maxTime" id="maxTimeField">
         <% for (var i = 1; i < 25; i++){ %>
           <option value="<%= i %>"><%= i %> <%= i < 2 ? 'hour':'hours' %></option>
         <% }; %>
       </select>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-3">
+    </td>
+  </tr>
+  <tr>
+    <th>
         Permit:
-    </div>
-    <div class="col-xs-9"
+    </th>
+    <td>
       <fieldset>
           <label for="required"><input type="radio" name="permit" value=true checked>Required</label>
           <label for="not-required"><input type="radio" name="permit" value=false>Not required</label>
       </fieldset>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-3">
+    </td>
+  </tr>
+  <tr>
+    <th>
       Cost:
-    </div>
-    <div class="col-xs-3">
+    </th>
+    <td>
       $<input type="text" id="costField">/hr
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-3">
+    </td>
+  </tr>
+  <tr>
+    <th>
       Cost Exceptions:
-    </div>
-    <div class="col-xs-3">
+    </th>
+    <td>
      <input type="text" id="costExceptionField">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-3">
+    </td>
+  </tr>
+  <tr>
+    <th>
       Comments:
-    </div>
-    <div class="col-xs-4">
+    </th>
+    <td>
       <textarea cols="20" rows="5" id="commentsField"></textarea>
-    </div>
-  </div>
-  <div class="submit-field">
-    <button id="submit">Submit</button>
-  </div>
-  </div> <!-- closes container div !-->
+    </td>
+  </tr>
+  <tr>
+    <td class="submit-field">
+      <button class="btn btn-success" id="submit">Submit</button>
+    </td>
+  </tr> <!-- closes container div !-->
+  </table>
 </template>
 
 <template id="addRow">
-  <div class="row">
-    <div class="col-xs-3">
-    </div>
-    <div class="col-xs-3">
+  <tr>
+    <td>
+    </td>
+    <td>
       <select name="validHours[day]" class="day">
         <% ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach(function(day){ %>
           <option value="<%= day %>"><%= day %></option>
@@ -131,7 +133,6 @@
           </option>
         <% }; %>
       </select>
-    </div>
-    </div>
-  </div>
+    </td>
+  </tr>
 </template>
