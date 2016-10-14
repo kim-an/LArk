@@ -14,7 +14,6 @@ navigator.geolocation.watchPosition(function(obj){
 
 var arrTips = [];
 
-
 function initMap() {
 
 function render(tips) {

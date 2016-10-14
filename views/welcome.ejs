@@ -59,7 +59,13 @@
               </div> <!-- closes intro -->
             </div> <!-- closes modal-body -->
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <% if (user) { %>
+                <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Close</button>
+              <% } else { %>
+                <button id="googleBtn" class="btn btn-social btn-google">
+                  <a id="log-in" href="/auth/google"><i class="fa fa-google"></i> &nbspSign in with Google</a>
+                </button>
+              <% } %>
             </div>
         </div> <!-- closes modal-content -->
       </div> <!-- modal-dialog modal-lg -->
