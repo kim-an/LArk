@@ -8,6 +8,10 @@ var $addTip = $('#add-tip');
 var $plus = $('#plus');
 var $map = $('#map');
 
+navigator.geolocation.watchPosition(function(obj){
+   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
+});
+
 var arrTips = [];
 
 
