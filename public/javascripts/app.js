@@ -8,6 +8,10 @@ var $addTip = $('#add-tip');
 var $plus = $('#plus');
 var $map = $('#map');
 
+navigator.geolocation.watchPosition(function(obj){
+   myLocation = {lat: obj.coords.latitude, lng: obj.coords.longitude};
+});
+
 var arrTips = [];
 
 
@@ -47,7 +51,7 @@ function render(tips) {
         $('#flag-button').remove();
       }
       editTip(infoWindow);
-      deleteTip(infoWindow);
+      deleteTip(infoWindow, marker);
     });
   });
 }
@@ -353,7 +357,7 @@ function editTip(infowindow){
   })
 }
 
-function deleteTip(infowindow) {
+function deleteTip(infowindow, marker) {
   $map.on('click', '#delete-tip', function(e) {
     console.log('delete clicked!');
     tipId = $('#comment').attr('data-id');
@@ -364,6 +368,7 @@ function deleteTip(infowindow) {
     }).done(function(response){
       console.log(response);
       infowindow.close();
+      marker.setMap(null);
     });
   });
 }
