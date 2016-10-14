@@ -59,7 +59,6 @@ router.put('/tips/:id', function(req, res, next){
       tip.flagged += 1;
       tip.flaggerIds.push(req.user._id);
       tip.save(function(err){
-        console.log('this was flagged');
         res.status(200).json(tip);
       });
     }
@@ -76,19 +75,17 @@ router.put('/tip', function(req, res, next){
     tip.cost = req.body.cost;
     tip.comment = req.body.comment;
     tip.save(function(err){
-      console.log("tip updated");
       res.status(200).json(tip);
-    })
-  })
-})
+    });
+  });
+});
 
 router.delete('/tip', function(req, res, next){
   Tip.findByIdAndRemove(req.body.tipId, function(err, tip){
     if (err) next(err);
-    console.log(`this tip was removed: ${tip}`);
     res.status(200).json(tip);
-  })
-})
+  });
+});
 
 module.exports = router;
 
