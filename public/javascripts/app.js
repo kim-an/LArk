@@ -47,7 +47,7 @@ function render(tips) {
         $('#flag-button').remove();
       }
       editTip(infoWindow);
-      deleteTip(infoWindow);
+      deleteTip(infoWindow, marker);
     });
   });
 }
@@ -353,7 +353,7 @@ function editTip(infowindow){
   })
 }
 
-function deleteTip(infowindow) {
+function deleteTip(infowindow, marker) {
   $map.on('click', '#delete-tip', function(e) {
     console.log('delete clicked!');
     tipId = $('#comment').attr('data-id');
@@ -364,6 +364,7 @@ function deleteTip(infowindow) {
     }).done(function(response){
       console.log(response);
       infowindow.close();
+      marker.setMap(null);
     });
   });
 }
