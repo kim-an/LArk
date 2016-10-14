@@ -179,6 +179,7 @@ function CenterControl(controlDiv, map) {
         }; // close newTip object
         arrTips.push(newTip);
         $.post('/tips', newTip, function(tip){
+          alert('Tip created!');
           infoWindow.close();
         }); // close post
       });
