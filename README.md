@@ -1,5 +1,5 @@
 # LArk
-![:LArk-logo](public/images/LArk_hp.png "Logo")
+![:LArk-logo](public/images/LArk_hp_readme.png "Logo")
 
 Park Cheap. Park Safe
 
