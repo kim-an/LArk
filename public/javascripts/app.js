@@ -79,7 +79,7 @@ function CenterControl(controlDiv, map) {
   controlText.style.lineHeight = '38px';
   controlText.style.paddingLeft = '5px';
   controlText.style.paddingRight = '5px';
-  controlText.innerHTML = '<img id="center-map-control" src="../images/center-map.png">';
+  controlText.innerHTML = '<img id="center-map-control" src="../images/center-map-sticker.png">';
   controlUI.appendChild(controlText);
 
   // Setup the click event listeners.
