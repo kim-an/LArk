@@ -38,11 +38,16 @@ function render(tips) {
       icon: '../images/LArk_pin_01.png'
     });
     marker.addListener('click', function(){
+      if(infoWindow) {
+        infoWindow.close();
+      }
       infoWindow.open(map, marker);
       if (tip.flaggerIds.includes(currentUserId)){
         $('#table-head').prepend($('#flagged-tip').html());
         $('#flag-button').remove();
       }
+      editTip(infoWindow);
+      deleteTip(infoWindow);
     });
   });
 }
@@ -50,35 +55,35 @@ function render(tips) {
 // for center button on map
 function CenterControl(controlDiv, map) {
 
-        // Set CSS for the control border.
-        var controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = '#fff';
-        controlUI.style.border = '2px solid #fff';
-        controlUI.style.borderRadius = '3px';
-        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
-        controlUI.style.cursor = 'pointer';
-        controlUI.style.marginBottom = '22px';
-        controlUI.style.textAlign = 'center';
-        controlUI.title = 'Click to recenter the map';
-        controlDiv.appendChild(controlUI);
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
 
-        // Set CSS for the control interior.
-        var controlText = document.createElement('div');
-        controlText.style.color = 'rgb(25,25,25)';
-        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
-        controlText.style.fontSize = '16px';
-        controlText.style.lineHeight = '38px';
-        controlText.style.paddingLeft = '5px';
-        controlText.style.paddingRight = '5px';
-        controlText.innerHTML = '<img id="center-map-control" src="../images/center-map.png">';
-        controlUI.appendChild(controlText);
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = '<img id="center-map-control" src="../images/center-map.png">';
+  controlUI.appendChild(controlText);
 
-        // Setup the click event listeners.
-        controlUI.addEventListener('click', function() {
-          map.setCenter(myLocation);
-        });
+  // Setup the click event listeners.
+  controlUI.addEventListener('click', function() {
+    map.setCenter(myLocation);
+  });
 
-      }
+}
 
   var styledMapType = new google.maps.StyledMapType([
     {
@@ -118,11 +123,11 @@ function CenterControl(controlDiv, map) {
   });
 
   // for center button on map
-    var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, map);
+  var centerControlDiv = document.createElement('div');
+  var centerControl = new CenterControl(centerControlDiv, map);
 
-    centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
+  centerControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(centerControlDiv);
 
 
   // associating the styled map w/existing map
@@ -144,7 +149,7 @@ function CenterControl(controlDiv, map) {
       clickLng = evt.latLng.lng();
 
       var form = $('#google-maps-form').html();
-      var infoWindow = new google.maps.InfoWindow({
+      infoWindow = new google.maps.InfoWindow({
         content: form
       });
 
@@ -155,7 +160,6 @@ function CenterControl(controlDiv, map) {
       });
 
       infoWindow.open(map, marker);
-
 // submit button action
       $map.on('click', '#submit', function(evt){
         newTip = {
@@ -179,8 +183,6 @@ function CenterControl(controlDiv, map) {
     } // close addTipToggle
   }); // close addListener
 
-  // add edit tip
-  editTip();
 
 // listener for flag
 $('#map').on('click', '#flag-button', function(evt){
@@ -306,7 +308,7 @@ function geocodeAddress(geocoder, resultsMap) {
   });
 }
 
-function editTip(){
+function editTip(infowindow){
     // edit-tip
   $map.on('click', '#edit-tip', function(e) {
     console.log('edit clicked');
@@ -346,10 +348,25 @@ function editTip(){
       data: editedTip
     }).done(function(response){
       console.log(response);
+      infowindow.close();
     });
   })
 }
 
+function deleteTip(infowindow) {
+  $map.on('click', '#delete-tip', function(e) {
+    console.log('delete clicked!');
+    tipId = $('#comment').attr('data-id');
+    $.ajax({
+      url:'/tip',
+      method: "DELETE",
+      data: {tipId: tipId}
+    }).done(function(response){
+      console.log(response);
+      infowindow.close();
+    });
+  });
+}
 
 $addTip.on('click', function(){
   addTipToggle = true;
